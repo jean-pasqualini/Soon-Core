@@ -63,17 +63,20 @@ class BlogController extends Controller
 
     // Controller suppression article
 
-    public function deleteAction($id, $valid)
+    public function deleteAction($id)
     {
-        $em = $this
-              ->getDoctrine()
-              ->getManager();
+        if ($request->request->get('valid') == true) {
+            $em = $this
+                  ->getDoctrine()
+                  ->getManager();
 
-        $em->remove($id);
+            $em->remove($id);
 
-        // if () {}
+            return $this->redirect($this->generateUrl('home'));
+        } else {
 
-        return $this->render('FTC56BlogBundle:Blog:delete.html.twig');
+            return $this->render('FTC56BlogBundle:Blog:delete.html.twig');
+        }
     }
 
     // Controller modification article
@@ -96,7 +99,6 @@ class BlogController extends Controller
 
     public function menuAction($number)
     {
-
         $list = 'test';
 
         return $this->render('FTC56BlogBundle:Blog:menu.html.twig', array('liste_articles' => $list));
