@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>{% block title %}{% endblock %}- {{ site_name }}</title>
+	<meta charset="UTF-8">
+	<meta name="identifier-url" content="<!-- URL site -->" />
+	<meta name="description" content="<!-- Description -->" />
+	<meta name="language" content="fr" />
+	<meta name="robots" content="all" />
+	{% stylesheets filter='cssrewrite'
+	'css/bootstrap.css' %}
+	<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+	{% endstylesheets %}
+	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+	<header class="navbar navbar-static-top" style="margin-top: 200px; margin-bottom: 30px;">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="{{ path('home') }}">{{ site_name }}</a>
+				{{ knp_menu_render('FTC56BlogBundle:Builder:mainMenu', {'currentClass': 'active'}) }}
+				<ul class="nav pull-right">
+					<li><a href="#">Connexion</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="#">Inscription</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		{% block body %}
+
+
+		{% endblock %}
+	</div>
+
+	<hr />
+
+	<footer>
+		<div class="container text-center">
+			Powered by Soon-Core <br />
+			Copyright © 2013 FTC56. All rights reserved>
+		</div>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Blog {% block blog_title %}{% endblock %}{% endblock %}
+
+{% block body %}
+	<div class="row-fluid">
+		<div class="span9">
+			{% block blog_body %}
+			{% endblock %}
+		</div>
+
+		<div class="span3">
+			{# render(controller("FTC56BlogBundle:Blog:menu", {'number': 3})) #}
+		</div>
+	</div>
+{% endblock %}

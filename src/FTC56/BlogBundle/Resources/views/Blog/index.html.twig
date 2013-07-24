@@ -1,0 +1,33 @@
+{% extends 'FTC56BlogBundle::base.html.twig' %}
+
+{% block blog_title %}{{ parent() }}{% endblock %}
+
+{% block blog_body %}
+	{% for article in list_articles %}
+		<div class="well well-small">
+			<h2 class='blog-header'><a href="{{ path('blog_view', { 'id': article.id }) }}">{{ article.title }}</a>
+				<small>
+					<i class="icon-pencil"></i> Ecrit le <time
+							datetime="{{ article.creation|date('Y/m/d') }}">{{ article.creation|date('d/m/Y') }}</time>
+					                            par {{ article.author }}.
+					{% if article.modification %}<i class="icon-edit"></i> Modifié le <time
+							datetime="{{ article.modification|date('Y/m/d') }}">{{ article.modification|date('d/m/Y') }}</time>.{% endif %}
+				</small>
+			</h2>
+
+			<p class="text-jutify">
+				{{ article.content }}
+			</p>
+
+			<p class="text-right"><a href="{{ path('blog_view', { 'id': article.id}) }}#comment">Affciher les
+			                                                                                     commentaires
+			                                                                                     ({{ article.comment|length }}
+			                                                                                     )</a></p>
+		</div>
+		<hr />
+
+	{% endfor %}
+
+{% endblock %}
+
+

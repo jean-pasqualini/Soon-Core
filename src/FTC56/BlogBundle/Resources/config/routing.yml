@@ -1,0 +1,49 @@
+home:
+    pattern: /{page}
+    defaults: { _controller: FTC56BlogBundle:Blog:index, page: 1 }
+
+blog_index:
+    pattern: /{page}
+    defaults: { _controller: FTC56BlogBundle:Blog:index, page: 1 }
+
+blog_view:
+    pattern: /article/{id}
+    defaults: { _controller: FTC56BlogBundle:Blog:view }
+    requirements:
+        id: \d+
+
+blog_add:
+    pattern: /add
+    defaults: { _controller: FTC56BlogBundle:Blog:add }
+
+blog_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: FTC56BlogBundle:Blog:delete }
+    requirements:
+        id: \d+
+
+blog_edit:
+    pattern: /edit/{id}
+    defaults: { _controller: FTC56BlogBundle:Blog:edit }
+    requirements:
+        id: \d+
+
+categories_list:
+    pattern: /categories/list
+    defaults: { _controller: FTC56BlogBundle:Categories:list }
+
+categories_view:
+    pattern: /categories/view/{id}
+    defaults: { _controller: FTC56BlogBundle:Categories:view }
+
+categories_add:
+    pattern: /categories/add
+    defaults: { _controller: FTC56BlogBundle:Categories:add }
+
+categories_edit:
+    pattern: /categories/edit/{id}
+    defaults: { _controller: FTC56BlogBundle:Categories:edit }
+
+categories_delete:
+    pattern: /categories/delete/{id}
+    defaults: { _controller: FTC56BlogBundle:Categories:delete }

@@ -1,0 +1,14 @@
+{% extends "FTC56BlogBundle::base.html.twig" %}
+
+{% block blog_title %}Catégories - {{ parent() }}{% endblock %}
+
+{% block blog_body %}
+	<h2 class="page-header">{{ category.name }}</h2>
+	<p class="text-jutify"><img src="{{ category.image }}" class="pull-right"
+	                            alt="{{ category.name }}" />{{ category.description }}</p>
+
+	<div class="btn-group span3">
+		<a class="btn btn-inverse">Editer</a>
+		<a class="btn btn-inverse ">Supprimer</a>
+	</div
+{% endblock %}

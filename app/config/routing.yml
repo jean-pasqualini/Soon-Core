@@ -1,0 +1,7 @@
+ftc56_blog:
+    resource: "@FTC56BlogBundle/Resources/config/routing.yml"
+    prefix:   /blog
+
+home:
+    pattern: /{page}
+    defaults: { _controller: FTC56BlogBundle:Blog:index, page: 1 }
