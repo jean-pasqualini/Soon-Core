@@ -2,9 +2,7 @@
 
 namespace FTC56\BlogBundle\Controller;
 
-use FTC56\BlogBundle\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 
 class BlogController extends Controller
 {
