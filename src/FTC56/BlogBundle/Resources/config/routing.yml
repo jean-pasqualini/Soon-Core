@@ -1,10 +1,8 @@
-home:
-    pattern: /{page}
-    defaults: { _controller: FTC56BlogBundle:Blog:index, page: 1 }
-
 blog_index:
     pattern: /{page}
     defaults: { _controller: FTC56BlogBundle:Blog:index, page: 1 }
+    requirements:
+        page: \d+
 
 blog_view:
     pattern: /article/{id}
@@ -35,6 +33,8 @@ categories_list:
 categories_view:
     pattern: /categories/view/{id}
     defaults: { _controller: FTC56BlogBundle:Categories:view }
+    requirements:
+        id: \d+
 
 categories_add:
     pattern: /categories/add
@@ -43,7 +43,11 @@ categories_add:
 categories_edit:
     pattern: /categories/edit/{id}
     defaults: { _controller: FTC56BlogBundle:Categories:edit }
+    requirements:
+        id: \d+
 
 categories_delete:
     pattern: /categories/delete/{id}
     defaults: { _controller: FTC56BlogBundle:Categories:delete }
+    requirements:
+        id: \d+

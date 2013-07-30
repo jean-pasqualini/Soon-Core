@@ -1,0 +1,3 @@
+site_home:
+     pattern: /{page}
+     defaults: { _controller: FTC56BlogBundle:Blog:index, page: 1 }

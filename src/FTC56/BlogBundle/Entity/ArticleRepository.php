@@ -11,15 +11,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
-    public function nbComment($id)
+    /*public function pagination()
     {
-        $qb = $this->_em->createQueryBuilder();
+        $articles = $this->_em->createQueryBuilder('a');
 
-        $qb
-        ->select('FTC56BlogBundle:Article', 'a')
-        ->where('a.id = :id')
-        ->setParameter('id', $id)
-        ->leftJoin('a.commentaires', 'c')
-        ->addSelect('count(c)');
-    }
+        $articles
+        ->setFirstResult(1)
+        ->setMaxResults(3);
+
+        // $nbArticle = $this->_em->createQueryBuilder('a');
+
+        // $nbArticle->addSelect('count(a)');
+
+        return $articles->getQuery()->getResult();
+            //'nbArticles' => $nbArticle->getQuery()->getSingleScalarResult()
+    }*/
 }

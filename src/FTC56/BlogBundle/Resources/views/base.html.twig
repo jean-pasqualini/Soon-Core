@@ -1,15 +1,23 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Blog {% block blog_title %}{% endblock %}{% endblock %}
+{% block title %}{% block blog_title %}{% endblock %} - Blog{% endblock %}
 
 {% block body %}
-	<div class="row-fluid">
-		<div class="span9">
+	<div class="row">
+		<div class="col-9">
+			{% for type in ['info', 'success', 'error'] %}
+				{% for message in app.session.flashbag.get(type) %}
+					<div class="alert alert-{{ type }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endfor %}
+
 			{% block blog_body %}
 			{% endblock %}
 		</div>
 
-		<div class="span3">
+		<div class="col-3">
 			{# render(controller("FTC56BlogBundle:Blog:menu", {'number': 3})) #}
 		</div>
 	</div>

@@ -3,5 +3,5 @@ ftc56_blog:
     prefix:   /blog
 
 home:
-    pattern: /{page}
-    defaults: { _controller: FTC56BlogBundle:Blog:index, page: 1 }
+    resource: "@FTC56BlogBundle/Resources/config/routing-home.yml"
+    prefix:   /

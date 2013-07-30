@@ -7,24 +7,24 @@
 	<meta name="description" content="<!-- Description -->" />
 	<meta name="language" content="fr" />
 	<meta name="robots" content="all" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	{% stylesheets filter='cssrewrite'
-	'css/bootstrap.css' %}
+	'css/bootstrap.min.css'
+	'css/bootstrap-glyphicons.css'%}
 	<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 	{% endstylesheets %}
 	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
-	<header class="navbar navbar-static-top" style="margin-top: 200px; margin-bottom: 30px;">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="{{ path('home') }}">{{ site_name }}</a>
-				{{ knp_menu_render('FTC56BlogBundle:Builder:mainMenu', {'currentClass': 'active'}) }}
-				<ul class="nav pull-right">
-					<li><a href="#">Connexion</a></li>
-					<li class="divider-vertical"></li>
-					<li><a href="#">Inscription</a></li>
-				</ul>
-			</div>
+	<header class="navbar navbar-inverse">
+		<div class="container">
+			<a class="navbar-brand" href="{{ path('site_home') }}">{{ site_name }}</a>
+
+			<form class="navbar-form pull-right">
+				<input type="text" class="form-control" style="width: 150px;" placeholder="Pseudo">
+				<input type="password" class="form-control" style="width: 150px;" placeholder="Mot de passe">
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
 		</div>
 	</header>
 
@@ -43,5 +43,10 @@
 			Copyright © 2013 FTC56. All rights reserved>
 		</div>
 	</footer>
+
+	{% javascripts
+	'js/*' %}
+	<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
 </body>
 </html>

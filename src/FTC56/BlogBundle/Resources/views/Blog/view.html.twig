@@ -1,14 +1,14 @@
 {% extends 'FTC56BlogBundle::base.html.twig' %}
 
-{% block blog_title %}{{ parent() }}{% endblock %}
+{% block blog_title %}{{ article.title }}{% endblock %}
 
 {% block blog_body %}
-	<h2 class="blog-header">{{ article.title }}</h2>
+	<h2 class="page-header">{{ article.title }}</h2>
 	<div class="muted text-right">
-		<i class="icon-pencil"></i> Ecrit le <time
+		<span class="glyphicon glyphicon-pencil"></span> Ecrit le <time
 				datetime="{{ article.creation|date('Y/m/d') }}">{{ article.creation|date('d/m/Y') }}</time>
 		                            par {{ article.author }}.
-		{% if article.modification %}<i class="icon-edit"></i> Modifié le <time
+		{% if article.modification %}<span class="glyphicon glyphicon-edit"></span> Modifié le <time
 				datetime="{{ article.modification|date('Y/m/d') }}">{{ article.modification|date('d/m/Y') }}</time>.{% endif %}
 	</div>
 
@@ -18,27 +18,35 @@
 
 	<p><a href="{{ path('blog_index') }}">Retourner à l'accueil</a></p>
 
-	<div class="row-fluid">
+	<div class="row">
 		{#{% if app.security.roles == 'ROLES_ADMIN' %}#}
-		<div class="btn-group span4">
-			<a class="btn btn-inverse"><i class="icon-edit icon-white"></i> Editer</a>
-			<a class="btn btn-inverse"><i class="icon-remove-sign icon-white"></i> Supprimer</a>
+			<div class="col-4">
+				<div class="btn-group btn-group-justified">
+				<a href="{{ path('blog_edit', { 'id': article.id }) }}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> Editer</a>
+				<a href="{{ path('blog_delete', { 'id': article.id }) }}" class="btn btn-default"><span class="glyphicon glyphicon-remove-sign"></span> Supprimer</a>
+			</div>
 		</div>
 
-		<ul class="inline span8 well well-small">{#{% else %}
-		<ul class="inline span12 well well-small">{% endif %}#}
-			<li>Catégories :</li>
+		<div class="col-8 well well-small">{#{% else %}
+		<ul class="span12 well well-small">{% endif %}#}
+			<span>Catégoreis :</span>
+			<span class="btn-group">
 			{% if article.categories.count > 0 %}
 				{% for category in article.categories %}
-					<li><a href="{{ path('categories_view', { 'id': category.id }) }}">{{ category.name }}</a></li>
+					<a href="{{ path('categories_view', { 'id': category.id }) }}" class="btn btn-small">{{ category.name }}</a>
 				{% endfor %}
-			{% endif %}
-		</ul>
+			{% endif %}</span>
+		</div>
 	</div>
 
 	<hr />
 
 	<h3 class="text-center" id="comment">Commentaires</h3>
-	<p class="alert alert-info">Prochainement !</p>
+	{% if article.comment|length > 0 %}
+		{% for comment in article.comment %}
+		{% endfor %}
+	{% else %}
+		<p class="alert alert-info text-center">Il n'y a pas d'article pour le moment !</p>
+	{% endif %}
 
 {% endblock %}
