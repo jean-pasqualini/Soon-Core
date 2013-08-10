@@ -55,7 +55,7 @@ class Article
      */
     private $categories;
     /**
-     * @ORM\OneToMany(targetEntity="FTC56\BlogBundle\Entity\Comment", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="FTC56\BlogBundle\Entity\Comment", cascade={"remove"}, mappedBy="article")
      */
     private $comment;
 

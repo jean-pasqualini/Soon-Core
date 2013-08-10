@@ -2,6 +2,7 @@
 
 namespace FTC56\BlogBundle\Controller;
 
+use FTC56\BlogBundle\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BlogController extends Controller
@@ -47,17 +48,9 @@ class BlogController extends Controller
     public function addAction()
     {
         $article = new article();
-
-        $form = $this->createFormBuilder($article)
-                ->add('creation', 'date')
-                ->add('title', 'text')
-                ->add('content', 'textarea')
-                ->add('author', 'text')
-                ->add('published', 'checkbox', array('required' => false))
-                ->getForm();
+        $form = $this->createForm(new ArticleType, $article);
 
         $request = $this->get('request');
-
         if ($request->getMethod() == 'POST'){
             $form->bind($request);
 

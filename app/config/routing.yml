@@ -2,6 +2,15 @@ ftc56_blog:
     resource: "@FTC56BlogBundle/Resources/config/routing.yml"
     prefix:   /blog
 
+login:
+    pattern:   /login
+    defaults:  { _controller: FTC56UserBundle:Security:login }
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    pattern:   /logout
+
 home:
     resource: "@FTC56BlogBundle/Resources/config/routing-home.yml"
-    prefix:   /
