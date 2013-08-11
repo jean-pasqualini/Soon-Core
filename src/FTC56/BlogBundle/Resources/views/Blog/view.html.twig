@@ -7,7 +7,7 @@
 	<div class="muted text-right">
 		<span class="glyphicon glyphicon-pencil"></span> Ecrit le <time
 				datetime="{{ article.creation|date('Y/m/d') }}">{{ article.creation|date('d/m/Y') }}</time>
-		                            par {{ article.author }}.
+		                                                 par {{ article.author }}.
 		{% if article.modification %}<span class="glyphicon glyphicon-edit"></span> Modifié le <time
 				datetime="{{ article.modification|date('Y/m/d') }}">{{ article.modification|date('d/m/Y') }}</time>.{% endif %}
 	</div>
@@ -19,21 +19,24 @@
 	<p><a href="{{ path('blog_index') }}">Retourner à l'accueil</a></p>
 
 	<div class="row">
-		{#{% if app.security.roles == 'ROLES_ADMIN' %}#}
-			<div class="col-4">
-				<div class="btn-group btn-group-justified">
-				<a href="{{ path('blog_edit', { 'id': article.id }) }}" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> Editer</a>
-				<a href="{{ path('blog_delete', { 'id': article.id }) }}" class="btn btn-default"><span class="glyphicon glyphicon-remove-sign"></span> Supprimer</a>
-			</div>
+	{% if is_granted('ROLE_AUTHOR') %}
+	<div class="col-4">
+		<div class="btn-group btn-group-justified">
+			<a href="{{ path('blog_edit', { 'id': article.id }) }}" class="btn btn-warning"><span
+						class="glyphicon glyphicon-edit"></span> Editer</a>
+			<a href="{{ path('blog_delete', { 'id': article.id }) }}" class="btn btn-danger"><span
+						class="glyphicon glyphicon-remove-sign"></span> Supprimer</a>
 		</div>
+	</div>
 
-		<div class="col-8 well well-small">{#{% else %}
-		<ul class="span12 well well-small">{% endif %}#}
+	<div class="col-8 well well-small">{% else %}
+		<div class="col-12 well well-small">{% endif %}
 			<span>Catégoreis :</span>
 			<span class="btn-group">
 			{% if article.categories.count > 0 %}
 				{% for category in article.categories %}
-					<a href="{{ path('categories_view', { 'id': category.id }) }}" class="btn btn-small">{{ category.name }}</a>
+					<a href="{{ path('categories_view', { 'id': category.id }) }}"
+					   class="btn btn-small">{{ category.name }}</a>
 				{% endfor %}
 			{% endif %}</span>
 		</div>

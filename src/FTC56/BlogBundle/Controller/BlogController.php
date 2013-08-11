@@ -3,6 +3,7 @@
 namespace FTC56\BlogBundle\Controller;
 
 use FTC56\BlogBundle\Form\ArticleType;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BlogController extends Controller
@@ -45,6 +46,9 @@ class BlogController extends Controller
 
     // Controller ajout article
 
+    /**
+     * @Secure(roles="ROLE_AUTHOR")
+     */
     public function addAction()
     {
         $article = new article();
@@ -72,6 +76,9 @@ class BlogController extends Controller
 
     // Controller suppression article
 
+    /**
+     * @Secure(roles="ROLE_AUTHOR")
+     */
     public function deleteAction($id)
     {
         $em = $this
@@ -89,6 +96,9 @@ class BlogController extends Controller
 
     // Controller modification article
 
+    /**
+     * @Secure(roles="ROLE_AUTHOR")
+     */
     public function editAction($id)
     {
     }

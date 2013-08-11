@@ -16,15 +16,11 @@
 	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
-	<header class="navbar navbar-inverse">
+	<header class="navbar navbar-inverse navbar-static-top">
 		<div class="container">
 			<a class="navbar-brand" href="{{ path('site_home') }}">{{ site_name }}</a>
 
-			<form class="navbar-form pull-right">
-				<input type="text" class="form-control" style="width: 150px;" placeholder="Pseudo">
-				<input type="password" class="form-control" style="width: 150px;" placeholder="Mot de passe">
-				<button type="submit" class="btn btn-default">Submit</button>
-			</form>
+			{#{% include "FTC56UserBundle:Security:navbar.html.twig" %}#}
 		</div>
 	</header>
 

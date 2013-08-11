@@ -11,8 +11,8 @@
         <element elementPath="$PROJECT_DIR$/app" typeId="app_directory" />
         <element elementPath="$PROJECT_DIR$/vendor" typeId="vendor_directory" />
         <element elementPath="$PROJECT_DIR$/src/FTC56/BlogBundle/Controller" typeId="controller" />
-        <element elementPath="$PROJECT_DIR$/src/FTC56/BlogBundle/DependencyInjection" typeId="dependencyInjection" />
         <element elementPath="$PROJECT_DIR$/web" typeId="web_directory" />
+        <element elementPath="$PROJECT_DIR$/src/FTC56/BlogBundle/DependencyInjection" typeId="dependencyInjection" />
         <element elementPath="$PROJECT_DIR$/src/FTC56/BlogBundle/Tests" typeId="tests" />
         <element elementPath="$PROJECT_DIR$/src" typeId="src_directory" />
       </list>
