@@ -102,7 +102,9 @@
     <parameter key="session.storage.mock_file.class">Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage</parameter>
     <parameter key="session.handler.native_file.class">Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler</parameter>
     <parameter key="session_listener.class">Symfony\Bundle\FrameworkBundle\EventListener\SessionListener</parameter>
-    <parameter key="session.storage.options" type="collection"/>
+    <parameter key="session.storage.options" type="collection">
+      <parameter key="name">Soon-Core</parameter>
+    </parameter>
     <parameter key="session.save_path">C:/Users/Gauthier/IdeaProjects/Soon-Core/app/cache/dev/sessions</parameter>
     <parameter key="form.resolved_type_factory.class">Symfony\Component\Form\ResolvedFormTypeFactory</parameter>
     <parameter key="form.registry.class">Symfony\Component\Form\FormRegistry</parameter>
@@ -2187,7 +2189,9 @@
       </argument>
     </service>
     <service id="session.storage.native" class="Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage">
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument key="name">Soon-Core</argument>
+      </argument>
       <argument type="service" id="session.handler"/>
     </service>
     <service id="session.storage.php_bridge" class="Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage">
@@ -2749,7 +2753,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>520a46f477336</argument>
+            <argument>520a4d93177d0</argument>
           </service>
         </argument>
       </argument>
@@ -3058,7 +3062,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>520a46f477336</argument>
+            <argument>520a4d93177d0</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
