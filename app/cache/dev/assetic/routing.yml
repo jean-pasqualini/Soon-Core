@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: 'C:/Users/Gauthier/IdeaProjects/Soon-Core/app/config/routing_dev.yml'

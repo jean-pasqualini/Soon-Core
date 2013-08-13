@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>{% block title %}{% endblock %}- {{ site_name }}</title>
+	<meta charset="UTF-8">
+	<meta name="identifier-url" content="<!-- URL site -->" />
+	<meta name="description" content="<!-- Description -->" />
+	<meta name="language" content="fr" />
+	<meta name="robots" content="all" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	{% stylesheets filter='cssrewrite'
+	'css/bootstrap.min.css'
+	'css/bootstrap-glyphicons.css'%}
+	<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+	{% endstylesheets %}
+	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+	<header class="navbar navbar-inverse navbar-static-top">
+		<div class="container">
+			<a class="navbar-brand" href="{{ path('site_home') }}">{{ site_name }}</a>
+			<div class="pull-right">
+				{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+					<p class="navbar-text">Connecté en tant que {{ app.user.username }} -</p> <a class="btn btn-default navbar-btn" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+				{% else %}
+					<a class="btn btn-default navbar-btn" href="{{ path('fos_user_security_login') }}">Connexion</a>
+				{% endif %}
+			</div>
+		</div>
+	</header>
+
+	<div class="container">
+		{% block body %}
+
+
+		{% endblock %}
+	</div>
+
+	<hr />
+
+	<footer>
+		<div class="container text-center">
+			Powered by Soon-Core <br />
+			Copyright © 2013 FTC56. All rights reserved>
+		</div>
+	</footer>
+
+	{% javascripts
+	'js/bootstrap.js' %}
+	<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+</body>
+</html>
