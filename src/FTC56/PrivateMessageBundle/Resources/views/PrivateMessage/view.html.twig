@@ -1,0 +1,11 @@
+{% extends "FTC56PrivateMessageBundle::layout.html.twig" %}
+
+{% block title %}Affichage du messages privés{% endblock %}
+
+{% block body %}
+	<h1 class="page-header">{{ pm.subject }} <small><span class="glyphicon glyphicon-pencil"></span>Envoyé le {{ pm.date|date('d/m/Y \\à H:i:s') }} par <a href="{{ path('user_view', {'name': pm.author }) }}">{{ pm.author }}</a></small></h1>
+	<div class="well">{{ pm.message }}</div>
+	<div>
+		<a class="btn btn-default">Répondre</a>
+	</div>
+{% endblock %}

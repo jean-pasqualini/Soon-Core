@@ -1,6 +1,18 @@
+ftc56_editor:
+    resource: "@FTC56EditorBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ftc56_private_message:
+    resource: "@FTC56PrivateMessageBundle/Resources/config/routing.yml"
+    prefix:   /mp
+
 ftc56_blog:
     resource: "@FTC56BlogBundle/Resources/config/routing.yml"
     prefix:   /blog
+
+ftc56_user:
+    resource: "@FTC56UserBundle/Resources/config/routing.yml"
+    prefix:   /user
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
@@ -20,6 +32,10 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group
 
 home:
     resource: "@FTC56BlogBundle/Resources/config/routing-home.yml"

@@ -1,0 +1,33 @@
+{% extends "FTC56UserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block fos_user_content %}
+	{% if error %}
+		<div class="alert alert-error">{{ error|trans }}</div>
+	{% endif %}
+
+	<form action="{{ path("fos_user_security_check") }}" method="post">
+		<fieldset class="row">
+			<legend>Connexion</legend>
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+			<div class="form-group col-3">
+				<input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'security.login.username'|trans }}" />
+			</div>
+
+			<div class="form-group col-3">
+				<input type="password" class="form-control" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans }}" />
+			</div>
+
+			<div class="checkbox col-3">
+				<input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+				<label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+			</div>
+
+			<input type="submit" class="btn btn-default" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+
+		</fieldset>
+	</form>
+{% endblock fos_user_content %}

@@ -1,0 +1,29 @@
+pm_sended:
+    pattern: /sended
+    defaults: { _controller: FTC56PrivateMessageBundle:PrivateMessage:index }
+
+pm_view:
+    pattern: /{id}/view
+    defaults: { _controller: FTC56PrivateMessageBundle:PrivateMessage:view }
+    requirements:
+        id: \d+
+
+pm_delete:
+    pattern: /{id]/delete
+    defaults: { _controller: FTC56PrivateMessageBundle:PrivateMessage:delete }
+    requirements:
+        id: \d+
+
+pm_edit:
+    pattern: /{id}/edit
+    defaults: { _controller: FTC56PrivateMessageBundle:PrivateMessage:edit }
+    requirements:
+        id: \d+
+
+pm_send:
+    pattern: /send
+    defaults: { _controller: FTC56PrivateMessageBundle:PrivateMessage:send }
+
+pm_index:
+    pattern: /
+    defaults: { _controller: FTC56PrivateMessageBundle:PrivateMessage:index }

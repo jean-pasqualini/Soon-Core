@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class BlogController extends Controller
 {
     // Controller index blog
+
     public function indexAction($page)
     {
         $em = $this
@@ -81,17 +82,21 @@ class BlogController extends Controller
      */
     public function deleteAction($id)
     {
-        $em = $this
-              ->getDoctrine()
-              ->getManager();
+        if ($request->getMethod() == 'POST'){
+            $em = $this
+                  ->getDoctrine()
+                  ->getManager();
 
-        $article = $em->getRepository('FTC56BlogBundle:Article')->find($id);
-        $em->remove($article);
-        $em->flush();
+            $article = $em->getRepository('FTC56BlogBundle:Article')->find($id);
+            $em->remove($article);
+            $em->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'L\' article a bien été supprimé !');
+            $this->get('session')->getFlashBag()->add('success', 'L\' article a bien été supprimé !');
 
-        return $this->redirect($this->generateUrl('site_home'));
+            return $this->redirect($this->generateUrl('site_home'));
+        }
+
+        // form confirmation suppression
     }
 
     // Controller modification article

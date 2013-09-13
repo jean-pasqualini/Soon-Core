@@ -1,6 +1,6 @@
 {% extends "FTC56BlogBundle::layout.html.twig" %}
 
-{% block blog_title %}Editer un article{% endblock %}
+{% block title %}Editer un article {{ parent() }}{% endblock %}
 
 {% block blog_body %}
 	{% include "FTC56BlogBundle:Blog:form.html.twig" %}

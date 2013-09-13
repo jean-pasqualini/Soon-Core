@@ -28,7 +28,6 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         site_name: %site_name%
-        copyright: Mass Effect Reborn &copy; 2013. Tous droits réservés.
 
 
 # Assetic Configuration
@@ -74,3 +73,16 @@ fos_user:
     db_driver:     orm
     firewall_name: main
     user_class:    FTC56\UserBundle\Entity\User
+    group:
+        group_class: FTC56\UserBundle\Entity\Group
+    service:
+        mailer: fos_user.mailer.twig_swift
+    from_email:
+        address:        %noreply_adress%
+        sender_name:    FTC56
+    registration:
+        confirmation:
+            enabled:    true
+    resetting:
+        email:
+            template: FTC56UserBundle:Email:resetting.email.html.twig

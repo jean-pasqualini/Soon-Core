@@ -1,0 +1,11 @@
+parameters:
+#    ftc56_editor.example.class: FTC56\EditorBundle\Example
+
+services:
+#    ftc56_editor.example:
+#        class: %ftc56_editor.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    twig.extension.twigext:
+        class: FTC56\EditorBundle\Twig\Extension\EditorExtension
+        tags:
+            - { name: twig.extension }

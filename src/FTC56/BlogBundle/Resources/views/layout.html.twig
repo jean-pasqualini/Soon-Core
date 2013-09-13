@@ -1,10 +1,10 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}{% block blog_title %}{% endblock %} - Blog{% endblock %}
+{% block title %} - Blog{% endblock %}
 
 {% block body %}
 	<div class="row">
-		<div class="col-9">
+		<div class="col-md-9">
 			{% for type in ['info', 'success', 'error'] %}
 				{% for message in app.session.flashbag.get(type) %}
 					<div class="alert alert-{{ type }}">
@@ -17,9 +17,9 @@
 			{% endblock %}
 		</div>
 
-		<div class="col-3 text-center">
+		<div class="col-md-3">
 			{% if is_granted('ROLE_AUTHOR') %}
-				<a href="{{ path('blog_add') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus">Ajouter un article</span></a>
+				<a href="{{ path('blog_add') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Ajouter un article</a>
 			{% endif %}
 		</div>
 	</div>

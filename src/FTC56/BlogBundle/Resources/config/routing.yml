@@ -15,13 +15,13 @@ blog_add:
     defaults: { _controller: FTC56BlogBundle:Blog:add }
 
 blog_delete:
-    pattern: /delete/{id}
+    pattern: /{id}/delete
     defaults: { _controller: FTC56BlogBundle:Blog:delete }
     requirements:
         id: \d+
 
 blog_edit:
-    pattern: /edit/{id}
+    pattern: /{id}/edit
     defaults: { _controller: FTC56BlogBundle:Blog:edit }
     requirements:
         id: \d+
@@ -31,7 +31,7 @@ categories_list:
     defaults: { _controller: FTC56BlogBundle:Categories:list }
 
 categories_view:
-    pattern: /categories/view/{id}
+    pattern: /categories/{id}
     defaults: { _controller: FTC56BlogBundle:Categories:view }
     requirements:
         id: \d+
@@ -41,13 +41,13 @@ categories_add:
     defaults: { _controller: FTC56BlogBundle:Categories:add }
 
 categories_edit:
-    pattern: /categories/edit/{id}
+    pattern: /categories/{id}/edit
     defaults: { _controller: FTC56BlogBundle:Categories:edit }
     requirements:
         id: \d+
 
 categories_delete:
-    pattern: /categories/delete/{id}
+    pattern: /categories/{id}/delete
     defaults: { _controller: FTC56BlogBundle:Categories:delete }
     requirements:
         id: \d+

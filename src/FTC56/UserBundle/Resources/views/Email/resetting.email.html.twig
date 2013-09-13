@@ -1,0 +1,16 @@
+{% block subject %}Réinitialisation du mot de passe{% endblock %}
+
+{% block body_text %}
+	{% autoescape false %}
+	Bonjour {{ user.username }} !
+
+	Vous pouvez réinitialiser votre mot de passe en vous rendant sur : <br />
+	{{ confirmationUrl }}
+
+	Cordialement,
+	Le staff de {{ site_name }}
+	{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+{% endblock %}

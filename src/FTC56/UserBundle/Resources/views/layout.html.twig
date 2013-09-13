@@ -1,5 +1,7 @@
 {% extends "::layout.html.twig" %}
 
+{% block title %}{% endblock %}
+
 {% block body %}
 	{% for key, message in app.session.flashbag.all() %}
 		<div class="alert alert-{{ key }}">

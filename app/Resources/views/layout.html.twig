@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<title>{% block title %}{% endblock %}- {{ site_name }}</title>
+	<title>{% block title %}{% endblock %} - {{ site_name }}</title>
 	<meta charset="UTF-8">
 	<meta name="identifier-url" content="<!-- URL site -->" />
 	<meta name="description" content="<!-- Description -->" />
@@ -9,8 +9,7 @@
 	<meta name="robots" content="all" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	{% stylesheets filter='cssrewrite'
-	'css/bootstrap.min.css'
-	'css/bootstrap-glyphicons.css'%}
+	'css/bootstrap.min.css' %}
 	<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 	{% endstylesheets %}
 	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -19,11 +18,18 @@
 	<header class="navbar navbar-inverse navbar-static-top">
 		<div class="container">
 			<a class="navbar-brand" href="{{ path('site_home') }}">{{ site_name }}</a>
+			<ul class="nav navbar-nav">
+				{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+					<li><a href="{{ path('fos_user_profile_show') }}">Profil</a></li>
+					<li><a href="{{ path('pm_index') }}">Messages privés</a></li>
+				{% endif %}
+			</ul>
 			<div class="pull-right">
 				{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-					<p class="navbar-text">Connecté en tant que {{ app.user.username }} -</p> <a class="btn btn-default navbar-btn" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+					<p class="navbar-text"> {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} - </p> <a class="btn btn-default navbar-btn" href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
 				{% else %}
-					<a class="btn btn-default navbar-btn" href="{{ path('fos_user_security_login') }}">Connexion</a>
+					<a class="btn btn-default navbar-btn" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+					<a class="btn btn-default navbar-btn" href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
 				{% endif %}
 			</div>
 		</div>
@@ -31,8 +37,6 @@
 
 	<div class="container">
 		{% block body %}
-
-
 		{% endblock %}
 	</div>
 
@@ -41,7 +45,7 @@
 	<footer>
 		<div class="container text-center">
 			Powered by Soon-Core <br />
-			Copyright © 2013 FTC56. All rights reserved>
+			Copyright © 2013 FTC56. All rights reserved.
 		</div>
 	</footer>
 

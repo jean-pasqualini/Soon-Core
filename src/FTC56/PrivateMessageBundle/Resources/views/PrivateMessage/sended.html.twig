@@ -1,0 +1,29 @@
+{% extends "FTC56PrivateMessageBundle::layout.html.twig" %}
+
+{% block title %}Messages privés{% endblock %}
+
+{% block pm %}
+		<h1 class="page-header">Messages envoyés</h1>
+		{% if pm_list|length > 0 %}
+			<table class="table table-striped text-center">
+				<thead>
+					<tr>
+						<td>Sujet</td>
+						<td>Destinataire</td>
+						<td>Date</td>
+					</tr>
+				</thead>
+				<tbody>
+				{% for pm in pm_list %}
+					<tr {% if pm.read == true %}class="success"{% endif %}>
+						<td class="text-left"><a href="{{ path('pm_view', {'id': pm.id}) }}">{{ pm.subject }}</a></td>
+						<td><a href="{{ path('user_view', {'name': pm.author}) }}">{{  pm.reciever }}</a></td>
+						<td>{{  pm.date|date('d/m/Y \\à H:i:s') }}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<div class="alert alert-info">Vous n'avez envoyé aucun message.</div>
+		{% endif %}
+{% endblock %}
