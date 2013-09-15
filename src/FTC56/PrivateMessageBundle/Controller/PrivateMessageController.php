@@ -3,7 +3,6 @@
 namespace FTC56\PrivateMessageBundle\Controller;
 
 use FTC56\PrivateMessageBundle\Entity\Message;
-use FTC56\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PrivateMessageController extends Controller
@@ -30,11 +29,9 @@ class PrivateMessageController extends Controller
         return $this->render('FTC56PrivateMessageBundle:PrivateMessage:sended.html.twig', array('pm_list' => $pm_list));
     }
 
-    public function viewAction($id)
+    public function viewAction(Message $message)
     {
-        $pm = $this->getDoctrine()->getManager()->getRepository('FTC56PrivateMessageBundle:Message')->find($id);
-
-        return $this->render('FTC56PrivateMessageBundle:PrivateMessage:view.html.twig', array('pm' => $pm));
+        return $this->render('FTC56PrivateMessageBundle:PrivateMessage:view.html.twig', array('message' => $message));
     }
 
     public function deleteAction($id)

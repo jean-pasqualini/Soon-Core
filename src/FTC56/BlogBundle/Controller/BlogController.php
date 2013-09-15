@@ -2,6 +2,7 @@
 
 namespace FTC56\BlogBundle\Controller;
 
+use FTC56\BlogBundle\Entity\Article;
 use FTC56\BlogBundle\Form\ArticleType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,36 +13,17 @@ class BlogController extends Controller
 
     public function indexAction($page)
     {
-        $em = $this
-              ->getDoctrine()
-              ->getManager();
+        $em            = $this->getDoctrine()->getManager();
+        $list_articles = $em->getRepository('FTC56BlogBundle:Article')->findAll();
 
-        $list_articles = $em
-                         ->getRepository('FTC56BlogBundle:Article')
-                         ->findAll();
-
-        return $this->render(
-            "FTC56BlogBundle:Blog:index.html.twig",
-            array('list_articles' => $list_articles)
+        return $this->render("FTC56BlogBundle:Blog:index.html.twig", array('list_articles' => $list_articles)
         );
     }
 
     // Controller vue article spécifique
 
-    public function viewAction($id)
+    public function viewAction(Article $article)
     {
-        $em = $this
-              ->getDoctrine()
-              ->getManager();
-
-        $article = $em
-                   ->getRepository('FTC56BlogBundle:Article')
-                   ->find($id);
-
-        if ($article === null) {
-            throw $this->createNotFoundException('Article[id=' . $id . '] inexistant.');
-        }
-
         return $this->render('FTC56BlogBundle:Blog:view.html.twig', array('article' => $article));
     }
 
@@ -53,10 +35,10 @@ class BlogController extends Controller
     public function addAction()
     {
         $article = new article();
-        $form = $this->createForm(new ArticleType, $article);
+        $form    = $this->createForm(new ArticleType, $article);
 
         $request = $this->get('request');
-        if ($request->getMethod() == 'POST'){
+        if ($request->getMethod() == 'POST') {
             $form->bind($request);
 
             if ($form->isValid()) {
@@ -70,9 +52,9 @@ class BlogController extends Controller
             }
         }
 
-        return $this->render('FTC56BlogBundle:Blog:add.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        return $this->render('FTC56BlogBundle:Blog:add.html.twig', array('form' => $form->createView(),
+                                                                   )
+        );
     }
 
     // Controller suppression article
@@ -82,10 +64,8 @@ class BlogController extends Controller
      */
     public function deleteAction($id)
     {
-        if ($request->getMethod() == 'POST'){
-            $em = $this
-                  ->getDoctrine()
-                  ->getManager();
+        if ($request->getMethod() == 'POST') {
+            $em = $this->getDoctrine()->getManager();
 
             $article = $em->getRepository('FTC56BlogBundle:Article')->find($id);
             $em->remove($article);
@@ -95,7 +75,6 @@ class BlogController extends Controller
 
             return $this->redirect($this->generateUrl('site_home'));
         }
-
         // form confirmation suppression
     }
 
@@ -106,14 +85,5 @@ class BlogController extends Controller
      */
     public function editAction($id)
     {
-    }
-
-    // Controller menu BlogBundle
-
-    public function menuAction($number)
-    {
-        $list = 'test';
-
-        return $this->render('FTC56BlogBundle:Blog:menu.html.twig', array('liste_articles' => $list));
     }
 }
