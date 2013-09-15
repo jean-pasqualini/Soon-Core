@@ -4,7 +4,6 @@ namespace FTC56\BlogBundle\Controller;
 
 use FTC56\BlogBundle\Entity\Article;
 use FTC56\BlogBundle\Form\ArticleType;
-use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BlogController extends Controller
