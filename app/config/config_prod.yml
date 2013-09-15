@@ -11,25 +11,25 @@ imports:
 #        result_cache_driver: apc
 #        query_cache_driver: apc
 
-monolog:
-    handlers:
-        main:
-            type:         fingers_crossed
-            action_level: critical
-            handler:      grouped
-        grouped:
-            type:    group
-            members: [nested, buffered]
-        nested:
-            type:  stream
-            path:  %kernel.logs_dir%/%kernel.environment%.log
-            level: debug
-        buffered:
-            type:    buffer
-            handler: swift
-        swift:
-            type:       swift_mailer
-            from_email: error@ftc56.net
-            to_email:   ftc56600@gmail.com
-            subject:    Une erreur est survenue !
-            level:      debug
+#monolog:
+#    handlers:
+#        main:
+#            type:         fingers_crossed
+#            action_level: critical
+#            handler:      grouped
+#        grouped:
+#            type:    group
+#            members: [nested, buffered]
+#        nested:
+#            type:  stream
+#            path:  %kernel.logs_dir%/%kernel.environment%.log
+#            level: debug
+#        buffered:
+#            type:    buffer
+#            handler: swift
+#        swift:
+#            type:       swift_mailer
+#            from_email: error@ftc56.net
+#            to_email:   ftc56600@gmail.com
+#            subject:    Une erreur est survenue !
+#            level:      debug
