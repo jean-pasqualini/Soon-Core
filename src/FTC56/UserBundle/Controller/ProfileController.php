@@ -2,7 +2,6 @@
 
 namespace FTC56\UserBundle\Controller;
 
-use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ProfileController extends Controller
