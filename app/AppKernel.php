@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new FTC56\UserBundle\FTC56UserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new FTC56\PrivateMessageBundle\FTC56PrivateMessageBundle(),
-            new FTC56\EditorBundle\FTC56EditorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
