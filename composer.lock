@@ -292,12 +292,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "b4a135c7db56ecc4602b54a2184368f440cac33e"
+                "reference": "adca0ae9f1a001fecb8ede6f84ea774d31ebc895"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/b4a135c7db56ecc4602b54a2184368f440cac33e",
-                "reference": "b4a135c7db56ecc4602b54a2184368f440cac33e",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/adca0ae9f1a001fecb8ede6f84ea774d31ebc895",
+                "reference": "adca0ae9f1a001fecb8ede6f84ea774d31ebc895",
                 "shasum": ""
             },
             "require": {
@@ -339,7 +339,7 @@
             "keywords": [
                 "database"
             ],
-            "time": "2013-07-10 17:04:07"
+            "time": "2013-09-13 02:48:05"
         },
         {
             "name": "doctrine/dbal",
@@ -724,12 +724,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "2038b755126e590ff2f21a7d64b3b9554e9c58e9"
+                "reference": "a6c12cc2b60176d2afad924f23031accfad9a384"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/2038b755126e590ff2f21a7d64b3b9554e9c58e9",
-                "reference": "2038b755126e590ff2f21a7d64b3b9554e9c58e9",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/a6c12cc2b60176d2afad924f23031accfad9a384",
+                "reference": "a6c12cc2b60176d2afad924f23031accfad9a384",
                 "shasum": ""
             },
             "require": {
@@ -784,7 +784,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2013-09-06 08:11:57"
+            "time": "2013-09-13 03:06:49"
         },
         {
             "name": "incenteev/composer-parameter-handler",
