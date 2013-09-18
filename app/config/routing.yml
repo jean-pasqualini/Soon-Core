@@ -1,3 +1,7 @@
+ftc56_editor:
+    resource: "@FTC56EditorBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ftc56_private_message:
     resource: "@FTC56PrivateMessageBundle/Resources/config/routing.yml"
     prefix:   /mp
