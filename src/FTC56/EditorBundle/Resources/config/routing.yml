@@ -1,3 +1,7 @@
 ftc56_editor_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: FTC56EditorBundle:Default:index }
+
+testbbcode:
+    pattern: /testBBCode
+    defaults: { _controller: FTC56EditorBundle:Editor:testBBCode }

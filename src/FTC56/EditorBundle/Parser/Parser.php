@@ -4,48 +4,104 @@ namespace FTC56\EditorBundle\Parser;
 
 class Parser
 {
-    private $bbcode = array(
-        '#\[b\](.+)\[\/b\]#isU' => '<strong>$1</strong>',
-        '#\[i\](.+)\[\/i\]#isU' => '<em>$1</em>',
-        '#\[u\](.+)\[\/u\]#isU' => '<span style="text-decoration:underline;">$1</span>',
-        '#\[strike\](.+)\[\/strike\]#isU' => '<span style="text-decoration:line-through;">$1</strike>',
-        '#\[left\](.+)\[\/left\]#isU' => '<span style="text-align:left;">$1</span>',
-        '#\[center\](.+)\[\/center\]#isU' => '<span style="text-align:center;">$1</span>',
-        '#\[right\](.+)\[\/right\]#isU' => '<span style="text-align:right;">$1</span>',
-        '#\[justify\](.+)\[\/justify\]#isU' => '<span style="text-align:justify;">$1</span>',
-        // '#\[list\]\[*\]\[/list\]#isU',
-        // '#\[list=1\]\[*\]\[/list\]#isU',
-        '#\[hr\]#' => '<hr />',
-        '#\[quote\](.+)\[\/quote\]#isU' => '<blockquote>$1</blockquote>',
-        // '#\[quote(="(.+)")?\](.+)\[\/quote\]#isU',
-        '#\[code\](.+)\[\/code\]#isU' => '<code>$1</code>',
-        // '#\[spoiler(="(.+)")?\](.+)\[\/spoiler\]#isU',
-        '#\[hide\](.+)\[\/hide\]#isU' => '<span style="display:none;">$1</span>',
-        // '#\[table\]\[tr][td][/td][/tr][/table\]#isU',
-        '#\[img\](.+)\[\/img\]#iU' => '<img src="$1" />',
-        '#\[img\(([0-9]+)px,([0-9]+)px\)\](.+)\[\/img\]#iU' => '<img src="$3" style="width:$1px; height:$2px;" />',
-        '#\[url\](.+)\[\/url\]#iU' => '<a href="$1">$1</a>',
-        '#\[url=(.+)\](.+)\[\/url\]#iU' => '<a href="$1">$2</a>',
-        '#\[size=([0-9]+)\](.+)\[\/size\]#isU' => '<span style="font-size:$1px;">$2</span>',
-        '#\[color=(([a-z]+)|(\#[a-f0-9]{3,6}))\](.+)\[\/color\]#isU',
-        '#\[font=(.+)\](.+)\[/font\]#isU' => '<span style="font-family:$1;">$2</span>',
-        '#\[sub\](.+)\[\/sub\]#isU' => '<sub>$1</sub>',
-        '#\[sup\](.+)\[\/sup\]#isU' => '<sup>$1</sup>',
-        // '#\[scroll\](.+)\[\/scroll\]#isU',
-        // '#\[updown\](.+)\[\/updown\]#isU',
-        // '#\[wow\](.+)\[\/wow\]#isU',
-        // '#\[rand\](.+)\[\/rand\]#isU',
-        '#\\n#' => '<br />'
-    );
 
-    public function parseText($text)
+    public function parser($text)
     {
-        $text = $this->bbcode($text);
+        if (preg_match('#~~no-bbcode#i',$text) == false)
+        {
+            $text = $this->bbcode($text);
+        }
+        if (preg_match('#~~markdown#i',$text))
+        {
+            $text = $this->markdown($text);
+        }
+
+        $text = $this->parse($text);
+
+        return $text;
     }
 
     private function bbcode($text)
     {
+        $bbcodesPattern = array(
+        '#\[b\](.+)\[\/b\]#isU',
+        '#\[i\](.+)\[\/i\]#isU',
+        '#\[u\](.+)\[\/u\]#isU',
+        '#\[strike\](.+)\[\/strike\]#isU',
+        '#\[left\](.+)\[\/left\]#isU',
+        '#\[center\](.+)\[\/center\]#isU',
+        '#\[right\](.+)\[\/right\]#isU',
+        '#\[justify\](.+)\[\/justify\]#isU',
+        '#\[hr\]#',
+        '#\[quote\](.+)\[\/quote\]#isU',
+        '#\[quote="(.+)"\](.+)\[\/quote\]#isU',
+        '#\[code\](.+)\[\/code\]#isU',
+        '#\[hide\](.+)\[\/hide\]#isU',
+        '#\[img\](.+)\[\/img\]#iU',
+        '#\[img\(([0-9]+)px,([0-9]+)px\)\](.+)\[\/img\]#iU',
+        '#\[url\](.+)\[\/url\]#iU',
+        '#\[url=(.+)\](.+)\[\/url\]#iU',
+        '#\[size=([0-9]+)\](.+)\[\/size\]#isU',
+        '#\[font=(.+)\](.+)\[/font\]#isU',
+        '#\[sub\](.+)\[\/sub\]#isU',
+        '#\[sup\](.+)\[\/sup\]#isU',
+        '#\\n#'
+    );
+        $bbcodesReplace = array(
+        '<strong>$1</strong>',
+        '<em>$1</em>',
+        '<span style="text-decoration:underline;">$1</span>',
+        '<span style="text-decoration:line-through;">$1</span>',
+        '<div style="text-align:left;">$1</div>',
+        '<div style="text-align:center;">$1</div>',
+        '<div style="text-align:right;">$1</div>',
+        '<div style="text-align:justify;">$1</div>',
+        '<hr />',
+        '<blockquote><p>$1</p></blockquote>',
+        '<blockquote cite="$1"><p>$2</p></blockquote>',
+        '<code>$1</code>',
+        '<span style="display:none;">$1</span>',
+        '<img src="$1" />',
+        '<img src="$3" style="width:$1px; height:$2px;" />',
+        '<a href="$1">$1</a>',
+        '<a href="$1">$2</a>',
+        '<span style="font-size:$1px;">$2</span>',
+        '<span style="font-family:$1;">$2</span>',
+        '<sub>$1</sub>',
+        '<sup>$1</sup>',
+        '<br />'
+    );
+        // '#\[list\]\[*\]\[/list\]#isU',
+        // '#\[list=1\]\[*\]\[/list\]#isU',
+        // '#\[spoiler(="(.+)")?\](.+)\[\/spoiler\]#isU',
+        // '#\[table\]\[tr][td][/td][/tr][/table\]#isU',
+        // '#\[color=(([a-z]+)|(\#[a-f0-9]{3,6}))\](.+)\[\/color\]#isU',
+        // '#\[scroll\](.+)\[\/scroll\]#isU',
+        // '#\[updown\](.+)\[\/updown\]#isU',
+        // '#\[wow\](.+)\[\/wow\]#isU',
+        // '#\[rand\](.+)\[\/rand\]#isU',
 
+        $text = preg_replace($bbcodesPattern, $bbcodesReplace, $text);
+
+        return $text;
+    }
+
+    private function markdown($text)
+    {
+        $markdownPattern = array();
+        $markdownReplace = array();
+
+        $text = preg_replace($markdownPattern, $markdownReplace, $text);
+
+        return $text;
+    }
+
+    private function parse($text)
+    {
+        $pattern = array('#~~no-bbcode#');
+        $replace = array('');
+
+        $text = preg_replace($pattern, $replace, $text);
 
         return $text;
     }
