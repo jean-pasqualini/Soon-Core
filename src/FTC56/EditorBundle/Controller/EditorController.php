@@ -7,14 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class EditorController extends Controller
 {
-    private $text = '[b]test[/b]
-                    [i]test[/i]
-                    [u]test[/u]
-                    [strike]test[/strike]
-                    [left]test[/left]
-                    [center]test[/center]
-                    [right]test[/right]
-                    [justify]test[/justify]';
+    private $text = '[i][b]Salut, je m\'appelle Krelek[/b][/i]';
 
     public function testBBCodeAction()
     {

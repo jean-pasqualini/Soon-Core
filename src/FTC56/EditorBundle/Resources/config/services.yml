@@ -1,7 +1,6 @@
 parameters:
-#    ftc56_editor.example.class: FTC56\EditorBundle\Example
+    ftc56_editor.example.class: FTC56\EditorBundle\Parser\Parser
 
 services:
-#    ftc56_editor.example:
-#        class: %ftc56_editor.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    ftc56_editor.parser:
+        class: %ftc56_editor.example.class%
