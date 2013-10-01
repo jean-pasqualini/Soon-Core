@@ -9,7 +9,9 @@
 	<meta name="robots" content="all" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	{% stylesheets filter='cssrewrite'
-	'css/bootstrap.min.css' %}
+	'css/bootstrap.min.css'
+	'bundles/ftc56editor/css/skins/simple.css'
+	'bundles/ftc56editor/css/sets/bbcode.css'%}
 	<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
 	{% endstylesheets %}
 	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -50,8 +52,15 @@
 	</footer>
 
 	{% javascripts
-	'js/bootstrap.js' %}
+	'js/jquery.js'
+	'bundles/ftc56editor/js/jquery.markitup.js'
+	'bundles/ftc56editor/js/sets/bbcode.js' %}
 	<script type="text/javascript" src="{{ asset_url }}"></script>
 	{% endjavascripts %}
+	<script type="text/javascript" >
+		$(document).ready(function() {
+			$("textarea").markItUp(mySettings);
+		});
+	</script>
 </body>
 </html>

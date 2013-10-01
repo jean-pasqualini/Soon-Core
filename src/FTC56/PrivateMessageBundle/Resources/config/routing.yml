@@ -1,6 +1,6 @@
 pm_sended:
     pattern: /sended
-    defaults: { _controller: FTC56PrivateMessageBundle:PrivateMessage:index }
+    defaults: { _controller: FTC56PrivateMessageBundle:PrivateMessage:sentView }
 
 pm_view:
     pattern: /{id}/view

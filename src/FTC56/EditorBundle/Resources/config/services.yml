@@ -1,6 +1,15 @@
 parameters:
-    ftc56_editor.example.class: FTC56\EditorBundle\Parser\Parser
+    ftc56_editor.paser.class: FTC56\EditorBundle\Parser\Parser
+    ftc56_editor.smiley.class: FTC56\EditorBundle\Parser\Smiley
 
 services:
     ftc56_editor.parser:
-        class: %ftc56_editor.example.class%
+        class: %ftc56_editor.paser.class%
+
+    ftc56_editor.smiley:
+        class: %ftc56_editor.smiley.class%
+
+    twig.extension.twigext:
+        class: FTC56\EditorBundle\Twig\Extension\ParserExtension
+        tags:
+            - { name: twig.extension }

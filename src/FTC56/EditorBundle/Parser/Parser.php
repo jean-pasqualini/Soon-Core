@@ -6,22 +6,24 @@ class Parser
 {
     public function parser($text)
     {
-        if (preg_match('#~~no-bbcode#i', $text) == false) {
+        if (!preg_match('#~~no-bbcode#i', $text)) {
             $text = $this->bbcode($text);
         }
 
-        $text = $this->info($text);
+        $smiley = new Smiley();
+        $text   = $smiley->smiley($text);
+        $text   = $this->info($text);
 
         return $text;
     }
 
     private function bbcode($text)
     {
-        $bbcodesPattern = array('#\[b\](.+)\[\/b\]#isU', '#\[i\](.+)\[\/i\]#isU', '#\[u\](.+)\[\/u\]#isU',
+        $pattern = array('#\[b\](.+)\[\/b\]#isU', '#\[i\](.+)\[\/i\]#isU', '#\[u\](.+)\[\/u\]#isU',
                                 '#\[strike\](.+)\[\/strike\]#isU', '#\[left\](.+)\[\/left\]#isU',
                                 '#\[center\](.+)\[\/center\]#isU', '#\[right\](.+)\[\/right\]#isU',
                                 '#\[justify\](.+)\[\/justify\]#isU', '#\[hr\]#', '#\[quote\](.+)\[\/quote\]#isU',
-                                '#\[quote="(.+)"\](.+)\[\/quote\]#isU', '#\[list(=1)?](.+)[/list]isU',
+                                '#\[quote="(.+)"\](.+)\[\/quote\]#isU', '#\[list(=1)?](.+)[/list]#isU',
                                 '#\[\*\]\s?(.*?)\n#is', '#\[table\](.+)\[/table\]#isU', '#\[tr\](.+)\[\/tr\]#isU',
                                 '#\[td\](.+)\[\/td\]#isU', '#\[code\](.+)\[\/code\]#isU', '#\[hide\](.+)\[\/hide\]#isU',
                                 '#\[img\](.+)\[\/img\]#iU', '#\[img\(([0-9]+)px,([0-9]+)px\)\](.+)\[\/img\]#iU',
@@ -30,7 +32,7 @@ class Parser
                                 '#\[size=([0-9]+)\](.+)\[\/size\]#isU', '#\[font=(.+)\](.+)\[/font\]#isU',
                                 '#\[sub\](.+)\[\/sub\]#isU', '#\[sup\](.+)\[\/sup\]#isU'
         );
-        $bbcodesReplace = array('<strong>$1</strong>', '<em>$1</em>',
+        $replace = array('<strong>$1</strong>', '<em>$1</em>',
                                 '<span style="text-decoration:underline;">$1</span>',
                                 '<span style="text-decoration:line-through;">$1</span>',
                                 '<div style="text-align:left;">$1</div>', '<div style="text-align:center;">$1</div>',
@@ -50,7 +52,7 @@ class Parser
         // '#\[wow\](.+)\[\/wow\]#isU',
         // '#\[rand\](.+)\[\/rand\]#isU',
 
-        $text = preg_replace($bbcodesPattern, $bbcodesReplace, $text);
+        $text = preg_replace($pattern, $replace, $text);
 
         // Paragraphes
         $text = str_replace('\r', '', $text);

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Message
  *
- * @ORM\Table(name="mp_message")
+ * @ORM\Table(name="pm_message")
  * @ORM\Entity
  */
 class Message
@@ -22,16 +22,14 @@ class Message
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="FTC56\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="reciever", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="FTC56\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $receiver;
 
@@ -59,9 +57,15 @@ class Message
     /**
      * @var boolean
      *
-     * @ORM\Column(name="read", type="boolean")
+     * @ORM\Column(name="seen", type="boolean")
      */
-    private $read;
+    private $seen;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+        $this->seen = false;
+    }
 
 
     /**
@@ -105,7 +109,7 @@ class Message
      */
     public function setReceiver($receiver)
     {
-        $this->reciever = $receiver;
+        $this->receiver = $receiver;
 
         return $this;
     }
@@ -190,25 +194,25 @@ class Message
     }
 
     /**
-     * Set read
+     * Set see
      *
-     * @param boolean $read
+     * @param boolean $seen
      * @return message
      */
-    public function setRead($read)
+    public function setSeen($seen)
     {
-        $this->read = $read;
+        $this->seen = $seen;
     
         return $this;
     }
 
     /**
-     * Get read
+     * Get seen
      *
      * @return boolean 
      */
-    public function getRead()
+    public function getSeen()
     {
-        return $this->read;
+        return $this->seen;
     }
 }

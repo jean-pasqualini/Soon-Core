@@ -12,9 +12,7 @@
 				datetime="{{ article.modification|date('Y/m/d') }}">{{ article.modification|date('d/m/y \\à H:i:s') }}</time>.{% endif %}
 	</div>
 
-	<p class="text-jutify">
-		{{ article.content }}
-	</p>
+	{% autoescape false %}{{ article.content|parse }}{% endautoescape %}
 
 	<p><a href="{{ path('blog_index') }}">Retourner à l'accueil</a></p>
 

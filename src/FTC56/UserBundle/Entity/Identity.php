@@ -4,7 +4,7 @@ namespace FTC56\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection as ArrayCollection;
-use FTC56\UserBundle\Entity\User;
+use FTC56\UserBundle\Entity\User as User;
 
 /**
  * Identity
@@ -45,7 +45,7 @@ class Identity
 
     public function __construct()
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
 
@@ -111,10 +111,10 @@ class Identity
      * @param \FTC56\UserBundle\Entity\User $users
      * @return Identity
      */
-    public function addUser(\FTC56\UserBundle\Entity\User $users)
+    public function addUser(User $users)
     {
         $this->users[] = $users;
-        $users->setIdentities($this);
+        $users->addIdentitie($this);
     
         return $this;
     }
@@ -124,7 +124,7 @@ class Identity
      *
      * @param \FTC56\UserBundle\Entity\User $users
      */
-    public function removeUser(\FTC56\UserBundle\Entity\User $users)
+    public function removeUser(User $users)
     {
         $this->users->removeElement($users);
     }

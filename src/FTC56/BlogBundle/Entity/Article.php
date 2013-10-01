@@ -50,6 +50,11 @@ class Article
      */
     private $published;
     /**
+     * @var boolean
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    private $deleted;
+    /**
      * @ORM\ManyToMany(targetEntity="FTC56\BlogBundle\Entity\Category", cascade={"persist"})
      * @ORM\JoinTable(name="blog_article_category")
      */
@@ -61,8 +66,9 @@ class Article
 
     public function __construct()
     {
-        $this->creation   = new \DateTime;
+        $this->creation   = new \DateTime();
         $this->published  = true;
+        $this->deleted = false;
         $this->categories = new Collections\ArrayCollection();
         $this->comment    = new Collections\ArrayCollection();
     }
@@ -212,6 +218,29 @@ class Article
         $this->published = $published;
 
         return $this;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     * @return Article
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
     }
 
     /**

@@ -15,9 +15,9 @@
 				</thead>
 				<tbody>
 				{% for pm in pm_list %}
-					<tr {% if pm.read == true %}class="success"{% endif %}>
+					<tr {% if pm.seen == false %}class="success"{% endif %}>
 						<td class="text-left"><a href="{{ path('pm_view', {'id': pm.id}) }}">{{ pm.subject }}</a></td>
-						<td><a href="{{ path('user_view', {'name': pm.author}) }}">{{  pm.reciever }}</a></td>
+						<td><a href="{{ path('user_view', {'name': pm.receiver}) }}">{{  pm.receiver }}</a></td>
 						<td>{{  pm.date|date('d/m/Y \\à H:i:s') }}</td>
 					</tr>
 				{% endfor %}

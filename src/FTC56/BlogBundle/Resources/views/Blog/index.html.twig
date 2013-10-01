@@ -15,9 +15,7 @@
 				</small>
 			</h2>
 
-			<p class="">
-				{{ article.content }}
-			</p>
+			{% autoescape false %}{{ article.content|parse }}{% endautoescape %}
 
 			<p class="text-right"><a href="{{ path('blog_view', { 'id': article.id}) }}#comment">Afficher les commentaires ({{ article.comment|length }})</a></p>
 		</div>

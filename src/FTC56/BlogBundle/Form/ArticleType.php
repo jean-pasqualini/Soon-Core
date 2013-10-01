@@ -15,7 +15,7 @@ class ArticleType extends AbstractType
             ->add('author', 'text')
             ->add('content', 'textarea')
             ->add('creation', 'date')
-            ->add('published', 'checkbox', array('requiered' => false))
+            ->add('published', 'checkbox', array('required' => false))
         ;
     }
 
