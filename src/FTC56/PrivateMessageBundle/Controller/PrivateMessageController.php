@@ -12,22 +12,18 @@ class PrivateMessageController extends Controller
     {
         $em      = $this->getDoctrine()->getManager();
         $user    = $this->getUser();
-        $message = $em->getRepository('FTC56PrivateMessageBundle:Message');
+        $message = $em->getRepository('FTC56PrivateMessageBundle:Message')->findBy(array('receiver' => $user->getId()), array('date' => 'desc'), 25, 0);;
 
-        $pm_list = $message->findBy(array('receiver' => $user->getId()), array('date' => 'desc'), 25, 0);
-
-        return $this->render('FTC56PrivateMessageBundle:PrivateMessage:index.html.twig', array('pm_list' => $pm_list));
+        return $this->render('FTC56PrivateMessageBundle:PrivateMessage:index.html.twig', array('messages' => $message));
     }
 
     public function sentViewAction()
     {
         $em      = $this->getDoctrine()->getManager();
         $user    = $this->getUser();
-        $message = $em->getRepository('FTC56PrivateMessageBundle:Message');
+        $message = $em->getRepository('FTC56PrivateMessageBundle:Message')->findBy(array('author' => $user->getId()), array('date' => 'desc'), 25, 0);
 
-        $pm_list = $message->findBy(array('author' => $user->getId()), array('date' => 'desc'), 25, 0);
-
-        return $this->render('FTC56PrivateMessageBundle:PrivateMessage:sent.html.twig', array('pm_list' => $pm_list));
+        return $this->render('FTC56PrivateMessageBundle:PrivateMessage:sent.html.twig', array('message' => $message));
     }
 
     public function viewAction(Message $message)
@@ -68,12 +64,10 @@ class PrivateMessageController extends Controller
         $request = $this->get('request');
         if ($request->getMethod() == 'POST') {
             $form->bind($request);
-
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($message);
                 $em->flush();
-
                 $this->get('session')->getFlashBag()->add('info', 'Le message a bien été envoyé !');
 
                 return $this->redirect($this->generateUrl('pm_index'));

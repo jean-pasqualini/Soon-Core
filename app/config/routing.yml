@@ -1,10 +1,14 @@
-ftc56_private_message:
-    resource: "@FTC56PrivateMessageBundle/Resources/config/routing.yml"
-    prefix:   /pm
-
 ftc56_blog:
     resource: "@FTC56BlogBundle/Resources/config/routing.yml"
     prefix:   /blog
+
+ftc56_forum:
+    resource: "@FTC56ForumBundle/Resources/config/routing.yml"
+    prefix:   /forum
+
+ftc56_private_message:
+    resource: "@FTC56PrivateMessageBundle/Resources/config/routing.yml"
+    prefix:   /pm
 
 ftc56_user:
     resource: "@FTC56UserBundle/Resources/config/routing.yml"

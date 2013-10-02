@@ -2,9 +2,7 @@
 
 namespace FTC56\EditorBundle\Twig\Extension;
 
-use Symfony\Component\HttpKernel\KernelInterface;
 use FTC56\EditorBundle\Parser\Parser;
-use Symfony\Bundle\TwigBundle\Loader\FilesystemLoader;
 
 class ParserExtension extends \Twig_Extension
 {

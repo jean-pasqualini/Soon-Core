@@ -1,0 +1,21 @@
+forum_index:
+    pattern: /
+    defaults: { _controller: FTC56ForumBundle:Forum:index }
+
+forum_forum:
+    pattern: /forum/{id}
+    defaults: { _controller: FTC56ForumBundle:Forum:forum }
+    requirements:
+        id: \d+
+
+forum_topic_view:
+    pattern: /view/{id}
+    defaults: { _controller: FTC56ForumBundle:Topic:view }
+
+forum_topic_delete:
+    pattern: /delete/{id}
+    defaults: { _controller: FTC56ForumBundle:Topic:delete }
+
+forum_topic_move:
+    pattern: /move/{id}
+    defaults: { _controller: FTC56ForumBundle:Topic:move }

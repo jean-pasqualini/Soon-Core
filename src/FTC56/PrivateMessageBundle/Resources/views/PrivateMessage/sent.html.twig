@@ -4,7 +4,7 @@
 
 {% block pm %}
 		<h1 class="page-header">Messages envoyés</h1>
-		{% if pm_list|length > 0 %}
+		{% if messages|length > 0 %}
 			<table class="table table-striped text-center">
 				<thead>
 					<tr>
@@ -14,11 +14,11 @@
 					</tr>
 				</thead>
 				<tbody>
-				{% for pm in pm_list %}
-					<tr {% if pm.seen == false %}class="success"{% endif %}>
-						<td class="text-left"><a href="{{ path('pm_view', {'id': pm.id}) }}">{{ pm.subject }}</a></td>
-						<td><a href="{{ path('user_view', {'name': pm.receiver}) }}">{{  pm.receiver }}</a></td>
-						<td>{{  pm.date|date('d/m/Y \\à H:i:s') }}</td>
+				{% for message in messages %}
+					<tr {% if message.seen == false %}class="success"{% endif %}>
+						<td class="text-left"><a href="{{ path('pm_view', {'id': message.id}) }}">{{ message.subject }}</a></td>
+						<td><a href="{{ path('user_view', {'name': message.receiver}) }}">{{  message.receiver }}</a></td>
+						<td>{{  message.date|date('d/m/Y \\à H:i:s') }}</td>
 					</tr>
 				{% endfor %}
 				</tbody>
