@@ -23,6 +23,11 @@ class AppKernel extends Kernel
             new FTC56\PrivateMessageBundle\FTC56PrivateMessageBundle(),
             new FTC56\EditorBundle\FTC56EditorBundle(),
             new FTC56\ForumBundle\FTC56ForumBundle(),
+            new JMS\AopBundle\JMSAopBundle(),
+            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

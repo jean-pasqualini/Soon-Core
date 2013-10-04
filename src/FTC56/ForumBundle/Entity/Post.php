@@ -3,13 +3,15 @@
 namespace FTC56\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FTC56\UserBundle\Entity\User;
+use FTC56\UserBundle\Entity\Identity as Identity;
+use FTC56\UserBundle\Entity\User as User;
 
 /**
  * Post
  *
  * @ORM\Table(name="forum_post")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Post
 {
@@ -21,47 +23,45 @@ class Post
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
-
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="text", nullable=false)
      */
     private $content;
-
     /**
      * @ORM\ManyToOne(targetEntity="FTC56\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
-
+    /**
+     * @ORM\ManyToOne(targetEntity="FTC56\UserBundle\Entity\Identity")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $authorIdentity;
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="creation", type="datetime")
      */
     private $creation;
-
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="modification", type="datetime", nullable=true)
      */
     private $modification;
-
     /**
      * @ORM\ManyToOne(targetEntity="FTC56\ForumBundle\Entity\Topic")
      * @ORM\JoinColumn(nullable=false)
      */
     private $topic;
-
     /**
      * @var integer
      *
@@ -70,13 +70,45 @@ class Post
     private $position;
 
     /**
+     * @ORM\prePersist
+     */
+    public function increaseMessages()
+    {
+        $messages = $this->getTopic()->getForum()->getMessages();
+        $this->getTopic()->getForum()->setMessages($messages+1);
+        $messages = $this->getTopic()->getMessages();
+        $this->getTopic()->setMessages($messages-1);
+    }
+
+    /**
+     * @ORM\preRemove
+     */
+    public function decreaseMessages()
+    {
+        $messages = $this->getTopic()->getForum()->getMessages();
+        $this->getTopic()->getForum()->setMessages($messages-1);
+        $messages = $this->getTopic()->getMessages();
+        $this->getTopic()->setMessages($messages-1);
+    }
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -88,18 +120,18 @@ class Post
     public function setTitle($title)
     {
         $this->title = $title;
-    
+
         return $this;
     }
 
     /**
-     * Get title
+     * Get content
      *
-     * @return string 
+     * @return string
      */
-    public function getTitle()
+    public function getContent()
     {
-        return $this->title;
+        return $this->content;
     }
 
     /**
@@ -111,18 +143,18 @@ class Post
     public function setContent($content)
     {
         $this->content = $content;
-    
+
         return $this;
     }
 
     /**
-     * Get content
+     * Get creation
      *
-     * @return string 
+     * @return \DateTime
      */
-    public function getContent()
+    public function getCreation()
     {
-        return $this->content;
+        return $this->creation;
     }
 
     /**
@@ -134,18 +166,18 @@ class Post
     public function setCreation($creation)
     {
         $this->creation = $creation;
-    
+
         return $this;
     }
 
     /**
-     * Get creation
+     * Get modification
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getCreation()
+    public function getModification()
     {
-        return $this->creation;
+        return $this->modification;
     }
 
     /**
@@ -157,18 +189,18 @@ class Post
     public function setModification($modification)
     {
         $this->modification = $modification;
-    
+
         return $this;
     }
 
     /**
-     * Get modification
+     * Get position
      *
-     * @return \DateTime 
+     * @return integer
      */
-    public function getModification()
+    public function getPosition()
     {
-        return $this->modification;
+        return $this->position;
     }
 
     /**
@@ -180,18 +212,18 @@ class Post
     public function setPosition($position)
     {
         $this->position = $position;
-    
+
         return $this;
     }
 
     /**
-     * Get position
+     * Get author
      *
-     * @return integer 
+     * @return \FTC56\UserBundle\Entity\User
      */
-    public function getPosition()
+    public function getAuthor()
     {
-        return $this->position;
+        return $this->author;
     }
 
     /**
@@ -203,18 +235,41 @@ class Post
     public function setAuthor(User $author)
     {
         $this->author = $author;
-    
+
         return $this;
     }
 
     /**
-     * Get author
+     * Get authorIdentity
      *
-     * @return \FTC56\UserBundle\Entity\User 
+     * @return \FTC56\UserBundle\Entity\Identity
      */
-    public function getAuthor()
+    public function getAuthorIdentity()
     {
-        return $this->author;
+        return $this->authorIdentity;
+    }
+
+    /**
+     * Set authorIdentity
+     *
+     * @param \FTC56\UserBundle\Entity\Identity $authorIdentity
+     * @return Post
+     */
+    public function setAuthorIdentity(Identity $authorIdentity = null)
+    {
+        $this->authorIdentity = $authorIdentity;
+
+        return $this;
+    }
+
+    /**
+     * Get topic
+     *
+     * @return \FTC56\ForumBundle\Entity\Topic
+     */
+    public function getTopic()
+    {
+        return $this->topic;
     }
 
     /**
@@ -226,17 +281,7 @@ class Post
     public function setTopic(Topic $topic)
     {
         $this->topic = $topic;
-    
-        return $this;
-    }
 
-    /**
-     * Get topic
-     *
-     * @return \FTC56\ForumBundle\Entity\Topic 
-     */
-    public function getTopic()
-    {
-        return $this->topic;
+        return $this;
     }
 }

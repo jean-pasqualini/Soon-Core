@@ -19,3 +19,19 @@ forum_topic_delete:
 forum_topic_move:
     pattern: /move/{id}
     defaults: { _controller: FTC56ForumBundle:Topic:move }
+
+view:
+    pattern: /view
+    defaults: { _controller: FTC56ForumBundle:Post:view }
+
+add:
+    pattern: /add
+    defaults: { _controller: FTC56ForumBundle:Post:add }
+
+edit:
+    pattern: /edit
+    defaults: { _controller: FTC56ForumBundle:Post:edit }
+
+delete:
+    pattern: /delete
+    defaults: { _controller: FTC56ForumBundle:Post:delete }

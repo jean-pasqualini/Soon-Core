@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Message
  *
  * @ORM\Table(name="pm_message")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="FTC56\PrivateMessageBundle\Entity\MessageRepository")
  */
 class Message
 {

@@ -1,7 +1,25 @@
 {% extends "FTC56ForumBundle::layout.html.twig" %}
 
-{% block title %}{% endblock %}
+{% block title %}Accueil{{ parent() }}{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Forum:index page</h1>
+{% block forum_body %}
+	<h1>Forum</h1>
+	<table class="table table-striped text-center">
+		<thead>
+			<tr>
+				<td>Forum</td>
+				<td>Statistiques</td>
+				<td>Dernier message</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for forum in forums %}
+				<tr>
+					<td class="text-left"><a href="{{ path('forum_forum', {'id': forum.id}) }}">{{ forum.name }}</a></td>
+					<td>Il y a {{ forum.messages }} messages et {{ forum.topics }} sujets dans ce forum.</td>
+					<td>{% if forum.lastPost|length == 0 %}Aucuns messages dans ce forum.{% else %}Dernier message par <a href="{{ path('user_view', {'name': forum.lastPost.author.username }) }}">{{ forum.lastPost.author.username }}</a> le {{ forum.lastPost.creation|date('d/m/Y \\à H:i:s') }}{% endif %}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}

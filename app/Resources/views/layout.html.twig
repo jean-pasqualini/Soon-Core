@@ -21,6 +21,7 @@
 		<div class="container">
 			<a class="navbar-brand" href="{{ path('site_home') }}">{{ site_name }}</a>
 			<ul class="nav navbar-nav">
+				<li><a href="{{ path('forum_index') }}">Forum</a></li>
 				{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 					<li><a href="{{ path('fos_user_profile_show') }}">Profil</a></li>
 					<li><a href="{{ path('pm_index') }}">Messages privés</a></li>

@@ -3,6 +3,7 @@
 namespace FTC56\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FTC56\UserBundle\Entity\User as User;
 
 /**
  * Comment
@@ -20,8 +21,8 @@ class Comment
     private $id;
 
     /**
-     * @var string
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="FTC56\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
@@ -33,7 +34,7 @@ class Comment
 
     /**
      * @var string
-     * @ORM\Column(name="modification", type="string", length=255)
+     * @ORM\Column(name="modification", type="string", length=255, nullable=true)
      */
     private $modification;
 
@@ -57,7 +58,8 @@ class Comment
 
     /**
      * Get id
-     * @return integer
+     *
+     * @return integer 
      */
     public function getId()
     {
@@ -65,68 +67,22 @@ class Comment
     }
 
     /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Comment
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
-     * Set content
-     *
-     * @param string $content
-     *
-     * @return Comment
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Get content
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
      * Set creation
      *
      * @param string $creation
-     *
      * @return Comment
      */
     public function setCreation($creation)
     {
         $this->creation = $creation;
-
+    
         return $this;
     }
 
     /**
      * Get creation
-     * @return string
+     *
+     * @return string 
      */
     public function getCreation()
     {
@@ -137,19 +93,19 @@ class Comment
      * Set modification
      *
      * @param string $modification
-     *
      * @return Comment
      */
     public function setModification($modification)
     {
         $this->modification = $modification;
-
+    
         return $this;
     }
 
     /**
      * Get modification
-     * @return string
+     *
+     * @return string 
      */
     public function getModification()
     {
@@ -157,22 +113,68 @@ class Comment
     }
 
     /**
+     * Set content
+     *
+     * @param string $content
+     * @return Comment
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string 
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \FTC56\UserBundle\Entity\User $author
+     * @return Comment
+     */
+    public function setAuthor(User $author)
+    {
+        $this->author = $author;
+    
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \FTC56\UserBundle\Entity\User 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
      * Set article
      *
      * @param \FTC56\BlogBundle\Entity\Article $article
-     *
      * @return Comment
      */
     public function setArticle(Article $article)
     {
         $this->article = $article;
-
+    
         return $this;
     }
 
     /**
      * Get article
-     * @return \FTC56\BlogBundle\Entity\Article
+     *
+     * @return \FTC56\BlogBundle\Entity\Article 
      */
     public function getArticle()
     {

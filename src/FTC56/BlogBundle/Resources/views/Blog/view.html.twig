@@ -5,11 +5,9 @@
 {% block blog_body %}
 	<h2 class="page-header">{{ article.title }}</h2>
 	<div class="muted text-right">
-		<span class="glyphicon glyphicon-pencil"></span> Ecrit le <time
-				datetime="{{ article.creation|date('Y/m/d') }}">{{ article.creation|date('d/m/y \\à H:i:s') }}</time>
+		<span class="glyphicon glyphicon-pencil"></span> Ecrit le {{ article.creation|date('d/m/y \\à H:i:s') }}
 		                                                 par <a href="{{ path('user_view', {'name': article.author}) }}">{{ article.author }}</a>.
-		{% if article.modification %}<span class="glyphicon glyphicon-edit"></span> Modifié le <time
-				datetime="{{ article.modification|date('Y/m/d') }}">{{ article.modification|date('d/m/y \\à H:i:s') }}</time>.{% endif %}
+		{% if article.modification %}<span class="glyphicon glyphicon-edit"></span> Modifié le {{ article.modification|date('d/m/y \\à H:i:s') }}.{% endif %}
 	</div>
 
 	{% autoescape false %}{{ article.content|parse }}{% endautoescape %}

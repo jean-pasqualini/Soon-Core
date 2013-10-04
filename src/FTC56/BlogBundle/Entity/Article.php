@@ -4,11 +4,13 @@ namespace FTC56\BlogBundle\Entity;
 
 use Doctrine\Common\Collections as Collections;
 use Doctrine\ORM\Mapping as ORM;
+use FTC56\UserBundle\Entity\User as User;
 
 /**
  * Article
  * @ORM\Table(name="blog_article")
- * @ORM\Entity(repositoryClass="FTC56\BlogBundle\Entity\ArticleRepository")
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Article
 {
@@ -25,8 +27,8 @@ class Article
      */
     private $title;
     /**
-     * @var string
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="FTC56\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
     /**
@@ -36,12 +38,12 @@ class Article
     private $content;
     /**
      * @var \DateTime
-     * @ORM\Column(name="creation", type="date")
+     * @ORM\Column(name="creation", type="datetime")
      */
     private $creation;
     /**
      * @var \DateTime
-     * @ORM\Column(name="modification", type="date", nullable=true)
+     * @ORM\Column(name="modification", type="datetime", nullable=true)
      */
     private $modification;
     /**
@@ -68,9 +70,17 @@ class Article
     {
         $this->creation   = new \DateTime();
         $this->published  = true;
-        $this->deleted = false;
+        $this->deleted    = false;
         $this->categories = new Collections\ArrayCollection();
         $this->comment    = new Collections\ArrayCollection();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateModification()
+    {
+        $this->setModification(new \DateTime());
     }
 
     /**
@@ -101,29 +111,6 @@ class Article
     public function setTitle($title)
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     *
-     * @return Article
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
 
         return $this;
     }
@@ -221,9 +208,19 @@ class Article
     }
 
     /**
+     * Get deleted
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
      * Set deleted
      *
      * @param boolean $deleted
+     *
      * @return Article
      */
     public function setDeleted($deleted)
@@ -234,13 +231,26 @@ class Article
     }
 
     /**
-     * Get deleted
-     *
-     * @return boolean
+     * Get author
+     * @return \FTC56\UserBundle\Entity\User
      */
-    public function getDeleted()
+    public function getAuthor()
     {
-        return $this->deleted;
+        return $this->author;
+    }
+
+    /**
+     * Set author
+     *
+     * @param \FTC56\UserBundle\Entity\User $author
+     *
+     * @return Article
+     */
+    public function setAuthor(User $author)
+    {
+        $this->author = $author;
+
+        return $this;
     }
 
     /**
@@ -286,7 +296,6 @@ class Article
     public function addComment(Comment $comment)
     {
         $this->comment[] = $comment;
-        $comment->setArticle($this);
 
         return $this;
     }

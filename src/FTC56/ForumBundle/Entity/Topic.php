@@ -10,6 +10,7 @@ use FTC56\UserBundle\Entity\User as User;
  *
  * @ORM\Table(name="forum_topic")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Topic
 {
@@ -67,6 +68,24 @@ class Topic
      * @ORM\Column(name="messages", type="integer")
      */
     private $messages;
+
+    /**
+     * @ORM\prePersist
+     */
+    public function increaseTopics()
+    {
+        $topics = $this->getForum()->getTopics();
+        $this->getForum()->setTopics($topics+1);
+    }
+
+    /**
+     * @ORM\preRemove
+     */
+    public function decreaseTopics()
+    {
+        $topics = $this->getForum()->getTopics();
+        $this->getForum()->setTopics($topics-1);
+    }
 
     /**
      * Get id

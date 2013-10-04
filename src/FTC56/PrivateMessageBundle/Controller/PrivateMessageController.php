@@ -11,8 +11,7 @@ class PrivateMessageController extends Controller
     public function indexAction()
     {
         $em      = $this->getDoctrine()->getManager();
-        $user    = $this->getUser();
-        $message = $em->getRepository('FTC56PrivateMessageBundle:Message')->findBy(array('receiver' => $user->getId()), array('date' => 'desc'), 25, 0);;
+        $message = $em->getRepository('FTC56PrivateMessageBundle:Message')->findBy(array('receiver' => $this->getUser()->getId()), array('date' => 'desc'), 25, 0);;
 
         return $this->render('FTC56PrivateMessageBundle:PrivateMessage:index.html.twig', array('messages' => $message));
     }
@@ -28,6 +27,10 @@ class PrivateMessageController extends Controller
 
     public function viewAction(Message $message)
     {
+        $message->setSeen(true);
+        $em = $this->getDoctrine()->getManager();
+        $em->flush($message);
+
         return $this->render('FTC56PrivateMessageBundle:PrivateMessage:view.html.twig', array('message' => $message));
     }
 
@@ -44,7 +47,6 @@ class PrivateMessageController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($message);
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('info', 'Le message a bien été édité !');

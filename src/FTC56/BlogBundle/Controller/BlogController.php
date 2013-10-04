@@ -64,7 +64,6 @@ class BlogController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($article);
                 $em->flush();
 
                 $this->get('session')->getFlashBag()->add('info', 'L\'article a bien été édité !');

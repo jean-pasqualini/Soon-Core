@@ -10,7 +10,7 @@ class ForumController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $forums = $em->getRepository('FTC56ForumBundle:Forum')->findBy(array('parent' => '0'), array('position' => 'desc', 'name' => 'asc'));
+        $forums = $em->getRepository('FTC56ForumBundle:Forum')->findBy(array('parent' => null), array('position' => 'desc', 'name' => 'asc'));
 
         return $this->render('FTC56ForumBundle:Forum:index.html.twig', array('forums' => $forums));
     }
