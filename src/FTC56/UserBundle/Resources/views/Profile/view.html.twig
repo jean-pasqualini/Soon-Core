@@ -4,4 +4,22 @@
 
 {% block body %}
 	<h1 class="page-header">Profil de {{ user.username }}</h1>
+    <div class="row">
+        <div class="col-md-3" style="display: inline-block;">
+            <img src="{{ user.avatar }}"  alt="Avatar {{ user.username }}" />
+        </div>
+        <div class="col-md-4"><strong>Nom : </strong>{{ user.username }}</div>
+        <div class="col-md-4"><strong>E-Mail : </strong>{{ user.email }}</div>
+    </div>
+
+    <h2>Identités</h2>
+    <hr />
+    <div style="text-align: center;">
+        {% for identity in user.identities %}
+                <figure>
+                    <img src="{{ identity.avatar }}" style="max-width: 200px; max-height: 320px;" alt="Avatar identité {{ identity.name }}" class="img-thumbnail">
+                    <figcaption>{{ identity.name }}</figcaption>
+                </figure>
+        {% endfor %}
+    </div>
 {% endblock %}

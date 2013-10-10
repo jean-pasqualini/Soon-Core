@@ -1,8 +1,12 @@
 
 user_view:
-    pattern: /{name}
+    pattern: /{id}
     defaults: { _controller: FTC56UserBundle:Profile:view }
+    requirements:
+        id: \d+
 
 user_contact:
-    pattern: /{name}/contact
+    pattern: /{id}/contact
     defaults: { _controller: FTC56UserBundle:Profile:contact }
+    requirements:
+        id: \d+

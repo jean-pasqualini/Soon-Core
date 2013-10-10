@@ -2,8 +2,8 @@
 
 namespace FTC56\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use FTC56\UserBundle\Entity\Identity as Identity;
 use FOS\UserBundle\Entity\User as BaseUser;
 
 /**
@@ -32,6 +32,44 @@ class User extends BaseUser
      * @ORM\JoinTable(name="user_user_identity")
      */
     private $identities;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
+     */
+    private $avatar;
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="registration", type="datetime")
+     */
+    private $registration;
+    /**
+     * @var \DateTime
+     * @ORM\Column(name="birth", type="datetime")
+     */
+    private $birth;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="messages", type="integer")
+     */
+    private $messages;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="topics", type="integer")
+     */
+    private $topics;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->groups = new ArrayCollection();
+        $this->identities = new ArrayCollection();
+        $this->registration = new \DateTime;
+    }
 
     /**
      * Add identities
@@ -64,5 +102,130 @@ class User extends BaseUser
     public function getIdentities()
     {
         return $this->identities;
+    }
+
+    /**
+     * Set avatar
+     *
+     * @param string $avatar
+     * @return User
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+    
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return string 
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set registration
+     *
+     * @param \DateTime $registration
+     * @return User
+     */
+    public function setRegistration($registration)
+    {
+        $this->registration = $registration;
+    
+        return $this;
+    }
+
+    /**
+     * Get registration
+     *
+     * @return \DateTime 
+     */
+    public function getRegistration()
+    {
+        return $this->registration;
+    }
+
+    /**
+     * Set birth
+     *
+     * @param \DateTime $birth
+     * @return User
+     */
+    public function setBirth($birth)
+    {
+        $this->birth = $birth;
+    
+        return $this;
+    }
+
+    /**
+     * Get birth
+     *
+     * @return \DateTime 
+     */
+    public function getBirth()
+    {
+        return $this->birth;
+    }
+
+    /**
+     * Set messages
+     *
+     * @param integer $messages
+     * @return User
+     */
+    public function setMessages($messages)
+    {
+        $this->messages = $messages;
+    
+        return $this;
+    }
+
+    /**
+     * Get messages
+     *
+     * @return integer 
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * Set topics
+     *
+     * @param integer $topics
+     * @return User
+     */
+    public function setTopics($topics)
+    {
+        $this->topics = $topics;
+    
+        return $this;
+    }
+
+    /**
+     * Get topics
+     *
+     * @return integer 
+     */
+    public function getTopics()
+    {
+        return $this->topics;
     }
 }

@@ -2,15 +2,13 @@
 
 namespace FTC56\UserBundle\Controller;
 
+use FTC56\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ProfileController extends Controller
 {
-    public function viewAction($name)
+    public function viewAction(User $user)
     {
-        $userManager = $this->get('fos_user.user_manager');
-        $user = $userManager->findUserByUsername($name);
-
         return $this->render('FTC56UserBundle:Profile:view.html.twig', array('user' => $user));
     }
 
