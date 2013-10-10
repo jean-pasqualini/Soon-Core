@@ -7,6 +7,7 @@ class Parser
     public function parser($text)
     {
         if (!preg_match('#~~no-bbcode#i', $text)) {
+            $text = htmlspecialchars($text);
             $text = $this->bbcode($text);
         }
 
