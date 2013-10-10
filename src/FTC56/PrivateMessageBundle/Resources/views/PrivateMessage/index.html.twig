@@ -17,7 +17,7 @@
 				{% for message in messages %}
 					<tr {% if message.seen == false %}class="success"{% endif %}>
 						<td class="text-left"><a href="{{ path('pm_view', {'id': message.id}) }}">{{ message.subject }}</a></td>
-						<td><a href="{{ path('user_view', {'name': message.author}) }}">{{  message.author }}</a></td>
+						<td><a href="{{ path('user_view', {'id': message.author.id }) }}">{{  message.author }}</a></td>
 						<td>{{  message.date|date('d/m/Y \\à H:i:s') }}</td>
 					</tr>
 				{% endfor %}

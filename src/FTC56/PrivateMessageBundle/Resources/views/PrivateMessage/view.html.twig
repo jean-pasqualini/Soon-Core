@@ -3,7 +3,7 @@
 {% block title %}Affichage du messages privés{% endblock %}
 
 {% block body %}
-	<h1 class="page-header">{{ message.subject }} <small><span class="glyphicon glyphicon-pencil"></span> Envoyé le {{ message.date|date('d/m/Y \\à H:i:s') }} par <a href="{{ path('user_view', {'name': message.author }) }}">{{ message.author }}</a></small></h1>
+	<h1 class="page-header">{{ message.subject }} <small><span class="glyphicon glyphicon-pencil"></span> Envoyé le {{ message.date|date('d/m/Y \\à H:i:s') }} par <a href="{{ path('user_view', {'id': message.author.id }) }}">{{ message.author }}</a></small></h1>
 	<div class="well">{{ message.message }}</div>
 	<div>
 		<a class="btn btn-default">Répondre</a>

@@ -3,24 +3,21 @@
 namespace FTC56\PrivateMessageBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class MessageRepository extends EntityRepository
 {
-    public function getArticles($nombreParPage, $page)
+    public function getMessagesList($receiver)
     {
-        if ((int) $page < 1) {
-            throw new \InvalidArgumentException('L\'argument $page ne peut être inférieur à 1 (valeur : "'.$page.'").');
-        }
-
         $query = $this->createQueryBuilder('m')
+            ->where('m.receiver = :receiver')
+            ->setParameter('receiver', $receiver)
             ->join('m.author', 'u')
             ->addSelect('u')
+            ->addOrderBy('m.date', 'desc')
+            ->setFirstResult(0)
+            ->setMaxResults(25)
             ->getQuery();
 
-        $query->setFirstResult(($page-1) * $nombreParPage)
-            ->setMaxResults($nombreParPage);
-
-        return new Paginator($query);
+        return $query->getResult();
     }
 }

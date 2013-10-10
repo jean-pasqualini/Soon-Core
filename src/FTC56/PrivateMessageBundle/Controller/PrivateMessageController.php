@@ -11,7 +11,7 @@ class PrivateMessageController extends Controller
     public function indexAction()
     {
         $em      = $this->getDoctrine()->getManager();
-        $message = $em->getRepository('FTC56PrivateMessageBundle:Message')->findBy(array('receiver' => $this->getUser()->getId()), array('date' => 'desc'), 25, 0);;
+        $message = $em->getRepository('FTC56PrivateMessageBundle:Message')->getMessagesList($this->getUser()->getId());
 
         return $this->render('FTC56PrivateMessageBundle:PrivateMessage:index.html.twig', array('messages' => $message));
     }

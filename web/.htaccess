@@ -4,6 +4,7 @@
 # startpage (path "/") because otherwise Apache will apply the rewritting rules
 # to each configured DirectoryIndex file (e.g. index.php, index.html, index.pl).
 DirectoryIndex app.php
+Allow from all
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
