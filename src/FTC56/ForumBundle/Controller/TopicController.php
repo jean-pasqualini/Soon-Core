@@ -7,16 +7,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class TopicController extends Controller
 {
-    public function viewAction(Topic $topic)
+    public function viewAction($id)
     {
-        return $this->render('FTC56ForumBundle:Topic:view.html.twig', array('topic' => $topic));
+        $em = $this->getDoctrine()->getManager();
+        $topic = $em->getRepository('FTC56ForumBundle:Topic')->find($id);
+        $posts = $em->getRepository('FTC56ForumBundle:Post')->getPosts($id);
+
+        return $this->render('FTC56ForumBundle:Topic:view.html.twig', array('topic' => $topic, 'posts' => $posts));
     }
 
     public function deleteAction($id)
     {
     }
 
-    public function moveAction($id)
+    public function moveAction(Topic $topic)
     {
     }
 

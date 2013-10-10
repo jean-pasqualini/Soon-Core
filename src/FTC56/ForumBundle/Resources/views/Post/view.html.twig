@@ -1,7 +1,29 @@
-{% extends "::base.html.twig" %}
+{% set user = post.author %}
+{% set identity = post.authorIdentity %}
 
-{% block title %}FTC56ForumBundle:Post:view{% endblock %}
-
-{% block body %}
-<h1>Welcome to the Post:view page</h1>
-{% endblock %}
+<div class="row">
+    <div class="col-md-2">
+        <figure>
+            {% if identity is null %}
+                <img src="{{ user.avatar }}" alt="{{ user.username }}" class="img-thumbnail">
+                <figcaption class="text-center">
+                    <a href="{{ path('user_view', {'id': user.id }) }}">{{ user.username }}</a>
+                </figcaption>
+            {% else %}
+                <img src="{{ identity.avatar }}" alt="{{ user.username }}" class="img-thumbnail">
+                <figcaption class="text-center">
+                    <a href="{{ path('user_view', {'id': user.id }) }}">{{ identity.name }}<br />
+                        ({{ user.username }})</a>
+                </figcaption>
+            {% endif %}
+        </figure>
+    </div>
+    <div class="col-md-10">
+        <small>Ecrit le {{ post.creation|date('d/m/Y \\à H:i:s') }}. {% if post.modification is defined %}Dernière modification le {{ post.modification|date('d/m/Y \\à H:i:s') }}{% endif %}</small>
+        <div class="well well-sm">
+            {% autoescape false %}
+                {{ post.content|parse }}
+            {% endautoescape %}
+        </div>
+    </div>
+</div>

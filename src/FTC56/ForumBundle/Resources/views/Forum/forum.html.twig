@@ -23,7 +23,7 @@
 					<tr>
 						<td class="text-left"><a href="{{ path('forum_forum', {'id': sub_forum.id}) }}">{{ sub_forum.name }}</a></td>
 						<td>Il y a {{ sub_forum.messages }} messages et {{ sub_forum.topics }} sujets dans ce forum.</td>
-						<td>{% if sub_forum.lastPost|length == 0 %}Aucuns messages dans ce forum.{% else %}Dernier message par <a href="{{ path('user_view', {'name': sub_forum.lastPost.author.username }) }}">{{ author }}</a> le {{ sub_forum.lastPost.creation|date('d/m/Y \\à H:i:s') }}{% endif %}</td>
+						<td>{% if sub_forum.lastPost|length == 0 %}Aucuns messages dans ce forum.{% else %}Dernier message par <a href="{{ path('user_view', {'id': sub_forum.lastPost.author.id }) }}">{{ author }}</a> le {{ sub_forum.lastPost.creation|date('d/m/Y \\à H:i:s') }}{% endif %}</td>
 					</tr>
 				{% endfor %}
 			</tbody>
@@ -53,9 +53,9 @@
 					{% endif %}
 					<tr>
 						<td class="text-left"><a href="{{ path('forum_topic_view', {'id': topic.id}) }}">{{ topic.name }}</a></td>
-						<td>Topic créé par <a href="{{ path('user_view', {'name': topic.author.username }) }}">{{ topic.author.username }}</a></td>
+						<td>Topic créé par <a href="{{ path('user_view', {'id': topic.author.id }) }}">{{ topic.author.username }}</a></td>
 						<td>Il y a {{ topic.messages }} messages dans ce topic.</td>
-						<td>{% if topic.lastPost|length == 0 %}Aucuns messages dans ce topic.{% else %}Dernier message par <a href="{{ path('user_view', {'name': topic.lastPost.author.username }) }}">{{ author }}</a> le {{ topic.lastPost.creation|date('d/m/Y \\à H:i:s') }}{% endif %}</td>
+						<td>{% if topic.lastPost|length == 0 %}Aucuns messages dans ce topic.{% else %}Dernier message par <a href="{{ path('user_view', {'id': topic.lastPost.author.id }) }}">{{ author }}</a> le {{ topic.lastPost.creation|date('d/m/Y \\à H:i:s') }}{% endif %}</td>
 					</tr>
 				{% endfor %}
 			</tbody>

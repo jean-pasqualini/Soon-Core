@@ -1,7 +1,11 @@
-{% extends "::base.html.twig" %}
+{% extends "FTC56ForumBundle::layout.html.twig" %}
 
 {% block title %}FTC56ForumBundle:Topic:view{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Topic:view page</h1>
+{% block forum_body %}
+    <h1 class="page-header">{{ topic.title }}{% if topic.description|length < 0 %}<small>{{ topic.description }}</small>{% endif %}</h1>
+    {% for post in posts %}
+        {% include 'FTC56ForumBundle:Post:view.html.twig' %}
+        <hr>
+    {% endfor %}
 {% endblock %}

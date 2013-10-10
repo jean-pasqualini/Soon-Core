@@ -26,9 +26,9 @@ class Topic
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
-    private $name;
+    private $title;
 
     /**
      * @var string
@@ -76,6 +76,8 @@ class Topic
     {
         $topics = $this->getForum()->getTopics();
         $this->getForum()->setTopics($topics+1);
+        $topics = $this->getAuthor()->getTopics();
+        $this->getAuthor()->setTopics($topics+1);
     }
 
     /**
@@ -85,6 +87,8 @@ class Topic
     {
         $topics = $this->getForum()->getTopics();
         $this->getForum()->setTopics($topics-1);
+        $topics = $this->getAuthor()->getTopics();
+        $this->getAuthor()->setTopics($topics-1);
     }
 
     /**
@@ -98,26 +102,26 @@ class Topic
     }
 
     /**
-     * Set name
+     * Set title
      *
-     * @param string $name
+     * @param string $title
      * @return Topic
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
     
         return $this;
     }
 
     /**
-     * Get name
+     * Get title
      *
      * @return string 
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**

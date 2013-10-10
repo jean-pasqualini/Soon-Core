@@ -10,7 +10,7 @@ use FTC56\UserBundle\Entity\User as User;
  * Post
  *
  * @ORM\Table(name="forum_post")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="FTC56\ForumBundle\Entity\PostRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Post
@@ -77,7 +77,9 @@ class Post
         $messages = $this->getTopic()->getForum()->getMessages();
         $this->getTopic()->getForum()->setMessages($messages+1);
         $messages = $this->getTopic()->getMessages();
-        $this->getTopic()->setMessages($messages-1);
+        $this->getTopic()->setMessages($messages+1);
+        $messages = $this->getAuthor()->getMessages();
+        $this->getAuthor()->setMessages($messages+1);
     }
 
     /**
@@ -89,6 +91,8 @@ class Post
         $this->getTopic()->getForum()->setMessages($messages-1);
         $messages = $this->getTopic()->getMessages();
         $this->getTopic()->setMessages($messages-1);
+        $messages = $this->getAuthor()->getMessages();
+        $this->getAuthor()->setMessages($messages-1);
     }
 
     /**
