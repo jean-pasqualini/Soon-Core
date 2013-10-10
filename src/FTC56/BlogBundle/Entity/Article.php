@@ -2,9 +2,9 @@
 
 namespace FTC56\BlogBundle\Entity;
 
-use Doctrine\Common\Collections as Collections;
+use Doctrine\Common\Collections;
 use Doctrine\ORM\Mapping as ORM;
-use FTC56\UserBundle\Entity\User as User;
+use FTC56\UserBundle\Entity\User;
 
 /**
  * Article

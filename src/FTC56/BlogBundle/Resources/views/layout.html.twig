@@ -4,7 +4,7 @@
 
 {% block body %}
 	<div class="row">
-		<div class="col-md-9">
+		<div class="col-md-10">
 			{% for type in ['info', 'success', 'error'] %}
 				{% for message in app.session.flashbag.get(type) %}
 					<div class="alert alert-{{ type }}">
@@ -17,7 +17,7 @@
 			{% endblock %}
 		</div>
 
-		<div class="col-md-3">
+		<div class="col-md-2">
 			{% if is_granted('ROLE_AUTHOR') %}
 				<a href="{{ path('blog_add') }}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Ajouter un article</a>
 			{% endif %}

@@ -28,13 +28,13 @@ class Comment
 
     /**
      * @var string
-     * @ORM\Column(name="creation", type="string", length=255)
+     * @ORM\Column(name="creation", type="datetime")
      */
     private $creation;
 
     /**
      * @var string
-     * @ORM\Column(name="modification", type="string", length=255, nullable=true)
+     * @ORM\Column(name="modification", type="datetime", nullable=true)
      */
     private $modification;
 
@@ -52,9 +52,12 @@ class Comment
 
     public function __construct()
     {
-        $this->creation = new \DateTime;
+        $this->setCreation(new \DateTime);
     }
 
+    public function updateModification() {
+        $this->setModification(new \DateTime);
+    }
 
     /**
      * Get id
