@@ -1,0 +1,3 @@
+ [right] a [left] b [/right] c [/left]
+ [url="http://www.google.fr/consomateur%20%produit?id=1][/url]
+ [noparse][b]bb[/b][/noparse]
