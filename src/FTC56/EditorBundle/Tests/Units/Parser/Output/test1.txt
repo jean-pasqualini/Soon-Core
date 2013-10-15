@@ -1,0 +1,1 @@
+<p><strong>titre</strong></p><p><div style="text-align:center;"><strong>je suis le maitre</strong></div></p><p><span style="text-decoration:line-through;">strike</span></p><p><div style="text-align:left;">left</div></p><p><div style="text-align:center;">center</div></p><p><div style="text-align:right;">right</div></p><p><blockquote><p>quote</p></blockquote></p>

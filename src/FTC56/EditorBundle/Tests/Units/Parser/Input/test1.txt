@@ -1,0 +1,7 @@
+[b]titre[/b]
+[center][b]je suis le maitre[/b][/center]
+[strike]strike[/strike]
+[left]left[/left]
+[center]center[/center]
+[right]right[/right]
+[quote]quote[/quote]
